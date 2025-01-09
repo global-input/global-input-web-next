@@ -1,3 +1,0 @@
-# security.txt
-Contact: mailto:info@iterativesolution.co.uk
-Policy: https://iterativesolution.co.uk/global-input-app/privacy

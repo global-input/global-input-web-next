@@ -1,20 +1,14 @@
 {
-  "cSpell.words": [
-    "appdata",
-    "codedata",
-    "dataitem",
-    "ekey",
-    "Elysio",
-    "formtitle",
-    "Futura",
-    "iconcontainer",
-    "Inputdata",
-    "noopener",
-    "noprint",
-    "onerow",
-    "Tisa",
-    "tnode",
-    "tworows",
-    "videoplayer"
-  ]
-}
+    "css.validate": false,
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "tailwindCSS.includeLanguages": {
+      "html": "html",
+      "javascript": "javascript",
+      "typescript": "typescript",
+      "javascriptreact": "javascriptreact",
+      "typescriptreact": "typescriptreact"
+    },
+    "tailwindCSS.emmetCompletions": true
+  }
