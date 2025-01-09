@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import StyledComponentsRegistry from '@/lib/registry';
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -41,7 +42,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen bg-white text-black antialiased">
         <div className="flex min-h-screen flex-col">
-          {children}
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </div>
       </body>
     </html>

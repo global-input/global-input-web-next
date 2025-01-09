@@ -1,0 +1,185 @@
+.
+├── README.md
+├── architecture
+│   ├── serviceWorkerfix.txt
+│   └── serviceWorkwrs.md
+├── design
+│   ├── form_encryption.md
+│   └── tree.txt
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.js
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── images
+│   │   ├── 1.svg
+│   │   ├── 2.svg
+│   │   ├── 3.svg
+│   │   ├── app-icon.png
+│   │   ├── app-store.png
+│   │   ├── arrow.svg
+│   │   ├── authentication.svg
+│   │   ├── background.svg
+│   │   ├── close.png
+│   │   ├── company-icon.png
+│   │   ├── connect.png
+│   │   ├── control.svg
+│   │   ├── decrypt-icon.png
+│   │   ├── decrypt.png
+│   │   ├── disconnect.png
+│   │   ├── encrypt-icon.png
+│   │   ├── encrypt.png
+│   │   ├── encryption.png
+│   │   ├── extension.png
+│   │   ├── extension.svg
+│   │   ├── firefox-addons.png
+│   │   ├── footer-background.svg
+│   │   ├── headerBackground-1440.svg
+│   │   ├── js-module.png
+│   │   ├── menu-symbol.svg
+│   │   ├── mobile.svg
+│   │   ├── module.png
+│   │   ├── pairing.png
+│   │   ├── personal-storage.png
+│   │   ├── play-store.png
+│   │   ├── qr-code.png
+│   │   ├── qrcode.png
+│   │   ├── react-module.png
+│   │   ├── right-poster-200-183.png
+│   │   ├── right-poster-350-320.png
+│   │   ├── right-poster-552-505.png
+│   │   ├── second-screen.svg
+│   │   ├── send-icon.png
+│   │   ├── settings.png
+│   │   ├── show-icon.png
+│   │   ├── small
+│   │   │   ├── 1.svg
+│   │   │   ├── 2.svg
+│   │   │   ├── 3.svg
+│   │   │   ├── extension.svg
+│   │   │   └── qrcode.png
+│   │   ├── small-app-icon.png
+│   │   ├── transfer.png
+│   │   └── web-store.png
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src
+│   ├── app
+│   │   ├── card-section
+│   │   │   └── index.tsx
+│   │   ├── favicon.ico
+│   │   ├── global-input-app
+│   │   │   ├── contact-us
+│   │   │   │   ├── mobile-ui
+│   │   │   │   │   └── index.ts
+│   │   │   │   └── page.tsx
+│   │   │   ├── get-app
+│   │   │   │   ├── mobile-ui
+│   │   │   │   │   └── index.ts
+│   │   │   │   └── page.tsx
+│   │   │   ├── mobile-encryption
+│   │   │   │   ├── MainPage.tsx
+│   │   │   │   ├── components
+│   │   │   │   │   ├── checkbox.tsx
+│   │   │   │   │   ├── copyButton.tsx
+│   │   │   │   │   ├── formElements.tsx
+│   │   │   │   │   ├── help.tsx
+│   │   │   │   │   ├── icons.tsx
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   ├── pageElements.tsx
+│   │   │   │   │   ├── tips.tsx
+│   │   │   │   │   └── tipsOnMain.tsx
+│   │   │   │   ├── mobile-decryption
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── result
+│   │   │   │   │       ├── index.tsx
+│   │   │   │   │       └── mobile-ui
+│   │   │   │   │           ├── onComputer.ts
+│   │   │   │   │           └── onMobile.ts
+│   │   │   │   ├── mobile-encryption
+│   │   │   │   │   ├── encrypt-content
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   ├── provide-content
+│   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   └── mobile-ui
+│   │   │   │   │   │       ├── onComputer.ts
+│   │   │   │   │   │       └── onMobile.ts
+│   │   │   │   │   └── result
+│   │   │   │   │       ├── index.tsx
+│   │   │   │   │       └── mobile-ui
+│   │   │   │   │           ├── onComputer.ts
+│   │   │   │   │           └── onMobile.ts
+│   │   │   │   └── page.tsx
+│   │   │   └── privacy
+│   │   │       ├── mobile-ui
+│   │   │       │   └── index.ts
+│   │   │       └── page.tsx
+│   │   ├── globals.css
+│   │   ├── how-it-works
+│   │   │   └── index.tsx
+│   │   ├── layout.tsx
+│   │   ├── mobile-ui
+│   │   │   ├── exampleFields.ts
+│   │   │   ├── index.ts
+│   │   │   └── pageMenu.ts
+│   │   ├── page.tsx
+│   │   └── poster-image
+│   │       └── index.tsx
+│   ├── components
+│   │   ├── page-footer
+│   │   │   └── index.tsx
+│   │   ├── page-header
+│   │   │   └── index.tsx
+│   │   └── ui
+│   │       ├── button.tsx
+│   │       ├── form.tsx
+│   │       ├── layout.tsx
+│   │       └── tips.tsx
+│   ├── lib
+│   │   ├── configs
+│   │   │   ├── images.ts
+│   │   │   └── userLoginText.ts
+│   │   ├── global-input-config
+│   │   │   └── index.ts
+│   │   ├── global-input-mobile
+│   │   │   ├── commons.ts
+│   │   │   ├── help.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── settingsEditor.tsx
+│   │   │   ├── storage.ts
+│   │   │   ├── useMobile.tsx
+│   │   │   └── widgets
+│   │   │       ├── base-components.tsx
+│   │   │       ├── connect-widget.tsx
+│   │   │       ├── index.ts
+│   │   │       ├── qr-components.tsx
+│   │   │       ├── tabs.tsx
+│   │   │       └── types.ts
+│   │   ├── micro-apps
+│   │   │   └── mobile-ui
+│   │   │       ├── addField.ts
+│   │   │       └── index.ts
+│   │   ├── page-metadata
+│   │   │   └── index.ts
+│   │   └── web-config
+│   │       └── index.ts
+│   ├── micro-apps
+│   │   └── mobile-encryption-example
+│   │       └── mobile-encryption
+│   │           └── encrypt-content
+│   │               └── images
+│   │                   └── encrypt-icon.png
+│   └── types
+│       ├── images.ts
+│       ├── index.ts
+│       └── user.ts
+├── tailwind.config.ts
+└── tsconfig.json
+
+49 directories, 134 files
