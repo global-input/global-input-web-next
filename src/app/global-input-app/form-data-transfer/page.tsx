@@ -70,11 +70,13 @@ const FormDataTransfer = () => {
 
     useEffect(() => {
         // Convert searchParams to location-like object for compatibility
-        const location = {
-            search: searchParams.toString()
-        };
-        loadFormFromQueryString(setDomain, onFormModified, location);
-    }, [searchParams]);
+        if (searchParams.size > 0) {  // Only process if there are search parameters
+            const location = {
+                search: `?${searchParams.toString()}`
+            };
+            loadFormFromQueryString(setDomain, onFormModified, location);
+        }
+    }, [searchParams, setDomain, onFormModified]);
 
     return (
         <AppContainer>
