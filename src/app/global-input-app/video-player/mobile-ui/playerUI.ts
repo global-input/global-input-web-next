@@ -1,9 +1,11 @@
-'use client';
+
+
 
 export const statusValue = (title: string, message: string) => {
     return {
         type: "view",
-        style: {},
+        style: {
+        },
         content: [{
             type: "text",
             content: title,
@@ -19,23 +21,21 @@ export const statusValue = (title: string, message: string) => {
                 color: "white"
             }
         }]
+
     };
 };
-
 export const fields = {
+
     mute: {
         id: "mute-unmute",
         type: "button",
         value: 0,
-        options: [
-            { value: 0, label: "🔇" }, 
-            { value: 1, label: "🔈" }
-        ],
+        options: [{ value: 0, label: "🔇"}, { value: 1, label: "🔈"}],
     },
-    errorMessage: {
-        id: "errorMessage",
-        type: 'info',
-        value: ''
+    errorMessage:{
+       id:"errorMessage",
+       type:'info',
+       value:''
     },
     status: {
         id: "playerStatus",
@@ -73,6 +73,7 @@ export const fields = {
         icon: "ff",
         viewId: "row4"
     },
+
     end: {
         id: "skipToEndButton",
         type: "button",
@@ -84,7 +85,7 @@ export const fields = {
         id: "videoSelector",
         type: "button",
         label: "Back",
-        icon: 'back',
+        icon:'back',
         viewId: "row5"
     },
     playPause: {
@@ -93,71 +94,78 @@ export const fields = {
         value: 0,
         label: "Play",
         icon: "play",
-        options: [
-            { value: 0, label: "Play", icon: "play" }, 
-            { value: 1, label: "Pause", icon: "pause" }
-        ],
+        options: [{ value: 0, label: "Play", icon: "play" }, { value: 1, label: "Pause", icon: "pause" }],
         viewId: "row5"
     },
+
+
+
+
 };
 
-export const initData = (videoData: any) => ({
-    id: 'video-player',
-    form: {
-        views: {
-            viewIds: {
-                row5: {
-                    style: {
-                        width: '98%',
-                        justifyContent: 'space-between'
-                    }
-                },
-                row4: {
-                    style: {
-                        width: '98%',
-                        justifyContent: 'space-between'
-                    }
-                }
-            }
-        },
-        title: videoData.title,
-        fields: Object.values(fields)
-    }
-});
 
-export const sendStatus = (mobile: any, title: string, message: string) => {
+export const initData = (videoData) => {
+
+    return {
+        id: 'video-player',
+        form: {
+            views:{
+                viewIds:{
+                    row5:{
+                        style: {
+                            width:'98%',
+                            justifyContent:'space-between'
+                        }
+                    },
+                    row4:{
+                        style: {
+                            width:'98%',
+                            justifyContent:'space-between'
+                        }
+                    }
+
+                }
+            },
+            title:videoData.title,
+            fields: Object.values(fields)
+        }
+    };
+
+
+
+}
+
+export const sendStatus = (mobile, title: string, message: string) => {
     mobile.sendValue(fields.status.id, statusValue(title, message));
 };
 
-export const sendPlayButton = (mobile: any) => {
+export const sendPlayButton = (mobile) => {
     mobile.sendValue(fields.playPause.id, fields.playPause.options[0].value);
 };
-
-export const sendPauseButton = (mobile: any) => {
+export const sendPauseButton = (mobile) => {
     mobile.sendValue(fields.playPause.id, fields.playPause.options[1].value);
 };
 
-export const sendSliderValue = (mobile: any, sliderValue: any) => {
+export const sendSliderValue = (mobile, sliderValue) => {
     mobile.sendValue(fields.slider.id, sliderValue);
 };
 
-export const sendUnmuteButton = (mobile: any) => {
+
+export const sendUnmuteButton = (mobile) => {
     mobile.sendValue(fields.mute.id, fields.mute.options[0].value);
 };
-
-export const sendMuteButton = (mobile: any) => {
+export const sendMuteButton = (mobile) => {
     mobile.sendValue(fields.mute.id, fields.mute.options[1].value);
 };
 
-export const displayClickOnVideoMessage = (mobile: any) => {
+export const displayClickOnVideoMessage=(mobile)=>{
     mobile.sendValue(fields.errorMessage.id, {
-        content: 'Please click on the video to enable audio control',
-        style: {
-            color: 'red'
+        content:'Please click on the video to enable audio control',
+        style:{
+            color:'red'
         }
     });
-};
-
-export const clearClickOnVideoMessage = (mobile: any) => {
+}
+export const clearClickOnVideoMessage=(mobile)=>{
     mobile.sendValue(fields.errorMessage.id, '');
-};
+}

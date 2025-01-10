@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import * as mobileUI from '@/lib/micro-apps/mobile-ui';
 import { useMobile } from '@/lib/global-input-mobile';
+
 import * as selectorUI from './selectorUI';
 import * as playerUI from './playerUI';
-import * as mobileUI from '@/lib/micro-apps/mobile-ui';
 
 export * from '@/lib/global-input-mobile';
 
@@ -14,19 +15,40 @@ export enum Mode {
     PLAY_VIDEO
 }
 
-interface VideoPlayerRef {
+interface VideoData {
+    title: string;
+    synopsis: string;
+    mp4: string;
+}
+
+interface VideoPlayer {
     current: HTMLVideoElement | null;
 }
 
+interface VideoControl {
+    setPlayVideoSource: (player: HTMLVideoElement | null, data: VideoData) => void;
+    playVideo: (player: HTMLVideoElement | null) => void;
+    setMuted: (player: HTMLVideoElement, muted: boolean) => void;
+    pauseVideo: (player: HTMLVideoElement | null) => void;
+    rewindVideo: (player: HTMLVideoElement | null, callback?: () => void) => void;
+    fastForwardVideo: (player: HTMLVideoElement | null) => void;
+    skipToBegin: (player: HTMLVideoElement | null) => void;
+    skipToEnd: (player: HTMLVideoElement | null) => void;
+    getVideoPlayerData: (player: HTMLVideoElement | null) => any;
+    throttleSliderValue: (value: any) => boolean;
+    getPreviousVideo: (data: VideoData) => VideoData;
+    getNextVideo: (data: VideoData) => VideoData;
+}
+
 interface ConnectMobileProps {
-    videoPlayer: VideoPlayerRef;
-    videoData: any;
-    setVideoData: (data: any) => void;
-    videoControl: any;
+    videoPlayer: VideoPlayer;
+    videoData: VideoData;
+    setVideoData: (data: VideoData) => void;
+    videoControl: VideoControl;
     allowAudio: boolean;
 }
 
-const buildInitData = (videoData: any, mode: Mode) => {
+const buildInitData = (videoData: VideoData, mode: Mode) => {
     switch (mode) {
         case Mode.PLAY_VIDEO:
             return playerUI.initData(videoData);
@@ -49,12 +71,12 @@ export const useConnectMobile = ({
 
     const changeMode = (newMode: Mode) => {
         setMode(newMode);
-        setConfigId(configId => configId + 1);
+        setConfigId(id => id + 1);
     };
 
     const mobile = useMobile(() => buildInitData(videoData, mode), true, configId);
 
-    const onChangeVideoData = (newVideoData: any) => {
+    const onChangeVideoData = (newVideoData: VideoData) => {
         videoControl.setPlayVideoSource(videoPlayer.current, newVideoData);
         if (mode === Mode.SELECT_VIDEO) {
             selectorUI.sendTitle(mobile, newVideoData.title);
@@ -77,7 +99,7 @@ export const useConnectMobile = ({
                     onChangeVideoData(videoControl.getNextVideo(videoData));
                     break;
                 default:
-                    mobileUI.onFieldChange(field, path => router.push(path));
+                    mobileUI.onFieldChange(field, (path) => router.push(path));
             }
         } else if (mode === Mode.PLAY_VIDEO) {
             switch (field.id) {
@@ -105,9 +127,8 @@ export const useConnectMobile = ({
                     }
                     break;
                 case playerUI.fields.mute.id:
-                    if (!videoPlayer.current) {
-                        break;
-                    }
+                    if (!videoPlayer.current) break;
+                    
                     if (field.value) {
                         if (!videoPlayer.current.muted) {
                             videoControl.setMuted(videoPlayer.current, true);
@@ -161,7 +182,7 @@ export const useConnectMobile = ({
                 playerUI.sendStatus(mobile, 'Paused', '');
                 playerUI.sendPlayButton(mobile);
             },
-            onTimeUpdate: (videoPlayer: VideoPlayerRef) => {
+            onTimeUpdate: (videoPlayer: VideoPlayer) => {
                 if (mode !== Mode.PLAY_VIDEO) return;
                 const { duration, sliderValue } = videoControl.getVideoPlayerData(videoPlayer.current);
                 if (!duration) return;

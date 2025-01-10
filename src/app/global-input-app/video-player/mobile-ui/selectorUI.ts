@@ -1,8 +1,7 @@
-'use client';
-
-import * as mobileUI from '@/lib/micro-apps/mobile-ui';
+import * as microAppsUI from '@/lib/micro-apps/mobile-ui';
 
 export const initDataId = "second-screen-video-selector";
+
 
 export const fields = {
     title: {
@@ -37,6 +36,7 @@ export const fields = {
         type: "button",
         icon: "right",
         viewId: "row2",
+
     },
     play: {
         id: "videoPlayer",
@@ -44,15 +44,18 @@ export const fields = {
         type: "button",
         icon: "select",
         viewId: "row3"
-    },
-    backToWebsiteHome: mobileUI.home
+    },backToWebsiteHome:microAppsUI.home////website
 };
 
 const titleValue = (title: string) => {
     return { ...fields.title.value, content: title };
-};
+}
+interface VideoData {
+    title: string;
+    synopsis: string;
+}
 
-export const initData = (videoData: any) => ({
+export const initData = (videoData: VideoData) => ({
     id: initDataId,
     form: {
         title: "Select Video to Play",
@@ -61,16 +64,17 @@ export const initData = (videoData: any) => ({
             { ...fields.synopsis, value: videoData.synopsis },
             fields.previous,
             fields.next,
-            fields.play,
-            fields.backToWebsiteHome
+            fields.play
+            ,fields.backToWebsiteHome////website
         ]
     }
 });
 
-export const sendTitle = (mobile: any, title: string) => {
+
+export const sendTitle = (mobile, title: string) => {
     mobile.sendValue(fields.title.id, titleValue(title));
 };
 
-export const sendSynopsis = (mobile: any, synopsis: string) => {
+export const sendSynopsis = (mobile, synopsis: string) => {
     mobile.sendValue(fields.synopsis.id, synopsis);
-};
+}
