@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:static": "next build && next export",
+    "deploy:s3": "aws s3 sync out/ s3://YOUR-BUCKET-NAME --delete",
+    "invalidate:cdn": "aws cloudfront create-invalidation --distribution-id YOUR-DISTRIBUTION-ID --paths \"/*\""
   },
   "dependencies": {
     "@yudiel/react-qr-scanner": "^2.1.0",
