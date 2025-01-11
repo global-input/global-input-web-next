@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { config } from '@/lib/web-config'
@@ -43,33 +41,7 @@ const textContent = {
   },
 }
 
-const Card = ({ href, icon: Icon, title, content }: {
-  href: string
-  icon: React.ComponentType
-  title: string
-  content: string[]
-}) => (
-  <Link
-    href={href}
-    className="flex flex-col justify-start items-center text-center bg-white text-[#5291cd] h-[300px] rounded-md
-               mt-2.5 mb-[50px] w-[95%] pb-[30px] max-w-[330px] no-underline
-               transition-all duration-150 ease-out hover:shadow-[0_0_30px_#0003] hover:-translate-y-[3px]
-               max-[800px]:mb-2.5"
-  >
-    <Icon />
-    <div className="text-xl mt-5 px-5">{title}</div>
-    <div className="flex-1 text-sm px-4 pt-2.5 w-full overflow-hidden">
-      {content}
-    </div>
-    <div className="w-full text-[#a8a8a8] flex flex-row justify-center pt-2">
-      <div className="text-[#5291cd] flex flex-row justify-start items-end whitespace-nowrap text-sm">
-        Learn More <Image src="/images/arrow.svg" alt="Arrow" width={20} height={20} />
-      </div>
-    </div>
-  </Link>
-)
-
-// Icon components
+// Icon components can be static
 const Icon = ({ src, alt }: { src: string; alt: string }) => (
   <Image src={src} alt={alt} width={50} height={50} className="mt-5" />
 )
@@ -80,6 +52,35 @@ const SecondScreenIcon = () => <Icon src="/images/second-screen.svg" alt="Second
 const EncryptionIcon = () => <Icon src="/images/encryption.png" alt="Encryption Icon" />
 const StorageIcon = () => <Icon src="/images/personal-storage.png" alt="Storage Icon" />
 const TransferIcon = () => <Icon src="/images/transfer.png" alt="Transfer Icon" />
+
+// Card component is static
+function Card({ href, icon: Icon, title, content }: {
+  href: string
+  icon: React.ComponentType
+  title: string
+  content: string[]
+}) {
+  return (
+    <Link
+      href={href}
+      className="flex flex-col justify-start items-center text-center bg-white text-[#5291cd] h-[300px] rounded-md
+                 mt-2.5 mb-[50px] w-[95%] pb-[30px] max-w-[330px] no-underline
+                 transition-all duration-150 ease-out hover:shadow-[0_0_30px_#0003] hover:-translate-y-[3px]
+                 max-[800px]:mb-2.5"
+    >
+      <Icon />
+      <div className="text-xl mt-5 px-5">{title}</div>
+      <div className="flex-1 text-sm px-4 pt-2.5 w-full overflow-hidden">
+        {content}
+      </div>
+      <div className="w-full text-[#a8a8a8] flex flex-row justify-center pt-2">
+        <div className="text-[#5291cd] flex flex-row justify-start items-end whitespace-nowrap text-sm">
+          Learn More <Image src="/images/arrow.svg" alt="Arrow" width={20} height={20} />
+        </div>
+      </div>
+    </Link>
+  )
+}
 
 export function CardSection() {
   return (
@@ -93,7 +94,7 @@ export function CardSection() {
           title={textContent.authentication.title}
           content={textContent.authentication.content}
         />
-        <Card
+         <Card
           href={config.paths.mobileControl.path}
           icon={ControlIcon}
           title={textContent.mobileControl.title}

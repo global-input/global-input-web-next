@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 
 const Step = ({ 
@@ -32,7 +30,7 @@ export function HowItWorks() {
                     min-[900px]:w-[800px] min-[1024px]:w-[900px]">
         <div className="flex flex-col justify-start items-start w-full
                        min-[600px]:flex-row min-[600px]:justify-between min-[600px]:items-center">
-          {/* Step 1 */}
+          {/* Step components with static backgrounds */}
           <Step className="bg-[url('/images/small/1.svg')] bg-[position:20px_85px] -top-[50px] left-[10px]
                           min-[600px]:top-0 min-[600px]:left-0
                           min-[1024px]:bg-[url('/images/1.svg')] min-[1024px]:bg-[position:10px_70px]">
@@ -42,7 +40,6 @@ export function HowItWorks() {
             </div>
           </Step>
 
-          {/* Step 2 */}
           <Step className="bg-[url('/images/small/2.svg')] bg-[position:15px_38px] -top-[120px] left-[50px]
                           min-[280px]:left-[80px] min-[320px]:-top-[120px] min-[320px]:left-[110px]
                           min-[400px]:-top-[120px] min-[400px]:left-[150px] min-[500px]:-top-[120px] min-[500px]:left-[200px]
@@ -54,7 +51,6 @@ export function HowItWorks() {
             </div>
           </Step>
 
-          {/* Step 3 */}
           <Step className="bg-[url('/images/small/3.svg')] bg-[position:35px_33px] -top-[160px] left-[70px]
                           min-[280px]:left-[100px] min-[320px]:-top-[180px] min-[320px]:left-[170px]
                           min-[400px]:-top-[180px] min-[400px]:left-[230px] min-[450px]:-top-[160px] min-[450px]:left-[250px]
