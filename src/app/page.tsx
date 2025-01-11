@@ -1,37 +1,27 @@
-'use client'
-
-import React from "react"
 import { config } from "@/lib/web-config"
 import { PageHeader } from "@/components/page-header"
 import { PageFooter } from "@/components/page-footer"
-import {
-  useConnectToMobile,
-  ConnectWindow,
-  ConnectButton,
-  DisconnectButton,
-} from "./mobile-ui"
-import { usePageTitle, useCanonicalPage } from "@/lib/page-metadata"
 import { PosterImage } from "./poster-image"
 import { HowItWorks } from "./how-it-works"
 import { CardSection } from "./card-section"
+import { HomePageClient } from './HomePageClient';
 
+// Static content that can be rendered on the server
 const headerTextContent = {
   title: "Mobile Integration Framework",
   subtitle:
     "Enable secure mobile capabilities in your applications with minimal code changes. Features encrypted QR authentication, dynamic mobile UI generation, and secure data exchange - perfect for streaming services, self-service systems, and IoT applications.",
 }
 
+// Static metadata for the page
+export const metadata = {
+  title: "Global Input App - Introducing Mobile Interoperability into Web and Device Applications",
+  alternates: {
+    canonical: 'https://globalinput.co.uk/'
+  }
+}
+
 export default function HomePage() {
-  const mobile = useConnectToMobile()
-
-  // Set the page title
-  usePageTitle(
-    "Global Input App - Introducing Mobile Interoperability into Web and Device Applications"
-  )
-
-  // Manage canonical link
-  useCanonicalPage("https://globalinput.co.uk/")
-
   return (
     <div className="flex flex-col justify-start items-center w-full min-h-screen bg-[#72a4d2] 
                     min-[880px]:bg-white min-[880px]:bg-[url('/images/headerBackground-1440.svg')] min-[880px]:bg-no-repeat min-[880px]:bg-cover">
@@ -48,14 +38,9 @@ export default function HomePage() {
                          max-[900px]:w-[50vw]">
             {headerTextContent.subtitle}
           </div>
-          <div className="flex flex-row mt-[30px]
-                         min-[300px]:w-[260px]
-                         min-[500px]:w-[340px]
-                         min-[650px]:w-[370px]">
-            <ConnectButton label="Connect Mobile" mobile={mobile} />
-            <ConnectWindow mobile={mobile} />
-            <DisconnectButton mobile={mobile} />
-          </div>
+          
+          {/* Client Component for interactive parts */}
+          <HomePageClient />
         </div>
 
         <CardSection />
