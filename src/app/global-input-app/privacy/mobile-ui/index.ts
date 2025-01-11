@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useMobile } from '@/lib/global-input-mobile'
+import { useMobile, FormField } from '@/lib/global-input-mobile'
 export * from '@/lib/global-input-mobile'
 
 const FIELDS = {
@@ -94,7 +94,7 @@ const initData = {
   },
 }
 
-const onFieldChange = (field: { id: string }, push: (path: string) => void) => {
+const onFieldChange = (field: FormField, push: (path: string) => void) => {
   switch (field.id) {
     case FIELDS.home.id:
       push("/")

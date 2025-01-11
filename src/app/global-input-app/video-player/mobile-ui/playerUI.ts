@@ -1,5 +1,10 @@
+import {MobileData} from '@/lib/global-input-mobile';
 
-
+export interface VideoData {
+    title: string;
+    synopsis: string;
+    mp4: string;
+}
 
 export const statusValue = (title: string, message: string) => {
     return {
@@ -104,7 +109,7 @@ export const fields = {
 };
 
 
-export const initData = (videoData) => {
+export const initData = (videoData:VideoData) => {
 
     return {
         id: 'video-player',
@@ -135,30 +140,30 @@ export const initData = (videoData) => {
 
 }
 
-export const sendStatus = (mobile, title: string, message: string) => {
+export const sendStatus = (mobile:MobileData, title: string, message: string) => {
     mobile.sendValue(fields.status.id, statusValue(title, message));
 };
 
-export const sendPlayButton = (mobile) => {
+export const sendPlayButton = (mobile:MobileData) => {
     mobile.sendValue(fields.playPause.id, fields.playPause.options[0].value);
 };
-export const sendPauseButton = (mobile) => {
+export const sendPauseButton = (mobile:MobileData) => {
     mobile.sendValue(fields.playPause.id, fields.playPause.options[1].value);
 };
 
-export const sendSliderValue = (mobile, sliderValue) => {
+export const sendSliderValue = (mobile:MobileData, sliderValue:number) => {
     mobile.sendValue(fields.slider.id, sliderValue);
 };
 
 
-export const sendUnmuteButton = (mobile) => {
+export const sendUnmuteButton = (mobile:MobileData) => {
     mobile.sendValue(fields.mute.id, fields.mute.options[0].value);
 };
-export const sendMuteButton = (mobile) => {
+export const sendMuteButton = (mobile:MobileData) => {
     mobile.sendValue(fields.mute.id, fields.mute.options[1].value);
 };
 
-export const displayClickOnVideoMessage=(mobile)=>{
+export const displayClickOnVideoMessage=(mobile:MobileData)=>{
     mobile.sendValue(fields.errorMessage.id, {
         content:'Please click on the video to enable audio control',
         style:{
@@ -166,6 +171,6 @@ export const displayClickOnVideoMessage=(mobile)=>{
         }
     });
 }
-export const clearClickOnVideoMessage=(mobile)=>{
+export const clearClickOnVideoMessage=(mobile:MobileData)=>{
     mobile.sendValue(fields.errorMessage.id, '');
 }

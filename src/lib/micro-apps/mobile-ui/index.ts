@@ -1,3 +1,4 @@
+import { FormField } from "@/lib/global-input-mobile"
 export const home = {
     id: 'back-to-website-home',
     type: 'button',
@@ -13,7 +14,7 @@ export const add = (inputFields: Record<string, any>) => {
     inputFields.backToHome = home
 }
 
-export const onFieldChange = (field: { id: string }, navigate: (path: string) => void) => {
+export const onFieldChange = (field: FormField, navigate: (path: string) => void) => {
     switch (field.id) {
         case home.id:
             navigate('/')

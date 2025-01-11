@@ -15,18 +15,13 @@ export enum Mode {
     PLAY_VIDEO
 }
 
-interface VideoData {
-    title: string;
-    synopsis: string;
-    mp4: string;
-}
 
 interface VideoPlayer {
     current: HTMLVideoElement | null;
 }
 
 interface VideoControl {
-    setPlayVideoSource: (player: HTMLVideoElement | null, data: VideoData) => void;
+    setPlayVideoSource: (player: HTMLVideoElement | null, data: playerUI.VideoData) => void;
     playVideo: (player: HTMLVideoElement | null) => void;
     setMuted: (player: HTMLVideoElement, muted: boolean) => void;
     pauseVideo: (player: HTMLVideoElement | null) => void;
@@ -36,19 +31,20 @@ interface VideoControl {
     skipToEnd: (player: HTMLVideoElement | null) => void;
     getVideoPlayerData: (player: HTMLVideoElement | null) => any;
     throttleSliderValue: (value: any) => boolean;
-    getPreviousVideo: (data: VideoData) => VideoData;
-    getNextVideo: (data: VideoData) => VideoData;
+    getPreviousVideo: (data: playerUI.VideoData) => playerUI.VideoData;
+    getNextVideo: (data: playerUI.VideoData) => playerUI.VideoData;
+    setCurrentTimeWithSlider: (player: HTMLVideoElement | null, value: number) => void;
 }
 
 interface ConnectMobileProps {
     videoPlayer: VideoPlayer;
-    videoData: VideoData;
-    setVideoData: (data: VideoData) => void;
+    videoData: playerUI.VideoData;
+    setVideoData: (data: playerUI.VideoData) => void;
     videoControl: VideoControl;
     allowAudio: boolean;
 }
 
-const buildInitData = (videoData: VideoData, mode: Mode) => {
+const buildInitData = (videoData: playerUI.VideoData, mode: Mode) => {
     switch (mode) {
         case Mode.PLAY_VIDEO:
             return playerUI.initData(videoData);
@@ -76,7 +72,7 @@ export const useConnectMobile = ({
 
     const mobile = useMobile(() => buildInitData(videoData, mode), true, configId);
 
-    const onChangeVideoData = (newVideoData: VideoData) => {
+    const onChangeVideoData = (newVideoData: playerUI.VideoData) => {
         videoControl.setPlayVideoSource(videoPlayer.current, newVideoData);
         if (mode === Mode.SELECT_VIDEO) {
             selectorUI.sendTitle(mobile, newVideoData.title);
@@ -107,7 +103,15 @@ export const useConnectMobile = ({
                     changeMode(Mode.SELECT_VIDEO);
                     break;
                 case playerUI.fields.slider.id:
-                    videoControl.setCurrentTimeWithSlider(videoPlayer.current, field.value);
+                    if (typeof field.value === 'number') {
+                        videoControl.setCurrentTimeWithSlider(videoPlayer.current, field.value);
+                    }
+                    else if (typeof field.value === 'string') {
+                        videoControl.setCurrentTimeWithSlider(videoPlayer.current, parseFloat(field.value));
+                    }
+                    else {
+                        videoControl.setCurrentTimeWithSlider(videoPlayer.current, 0);
+                    }                    
                     break;
                 case playerUI.fields.rw.id:
                     playerUI.sendStatus(mobile, '<<', '');

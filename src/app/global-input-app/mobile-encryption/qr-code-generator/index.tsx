@@ -14,7 +14,11 @@ interface Props {
 }
 
 export const QRCodeGenerator: React.FC<Props> = ({ back }) => {
-    const [page, setPage] = useState({ 
+    const [page, setPage] = useState<{
+        id: typeof pages[keyof typeof pages];
+        content: string;
+        label: string;
+    }>({ 
         id: pages.CONTENT_LABEL, 
         content: '', 
         label: '' 

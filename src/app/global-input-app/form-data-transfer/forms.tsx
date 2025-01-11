@@ -1,5 +1,6 @@
 'use client';
 
+import {FormField, convertFieldValueToInputValue,convertFieldValueToStringValue} from '@/lib/global-input-mobile';
 import React, { useState } from 'react';
 import {
     Field,
@@ -18,13 +19,6 @@ import {
     Footer2
 } from './components';
 
-interface FormField {
-    id: string;
-    label: string;
-    value: string;
-    type?: string;
-    nLines?: number;
-}
 
 interface DisplayInputFieldProps {
     formField: FormField;
@@ -88,7 +82,7 @@ export const DisplayInputField: React.FC<DisplayInputFieldProps> = ({
                     <Input
                         id={formField.id}
                         type={type}
-                        value={formField.value}
+                        value={convertFieldValueToInputValue(formField.value)}
                         placeholder={formField.label}
                         onChange={onChange}
                         onFocus={onFocus}
@@ -96,7 +90,7 @@ export const DisplayInputField: React.FC<DisplayInputFieldProps> = ({
                     />
                     <Label htmlFor={formField.id}>{formField.label}</Label>
                 </Field>
-                <CopyToClipboardButton value={formField.value} position={3}>
+                <CopyToClipboardButton value={convertFieldValueToStringValue(formField.value)} position={3}>
                     Copy
                 </CopyToClipboardButton>
             </InputGroup>
@@ -111,13 +105,13 @@ export const DisplayInputField: React.FC<DisplayInputFieldProps> = ({
             <Field>
                 <TextArea
                     id={formField.id}
-                    value={formField.value}
+                    value={convertFieldValueToInputValue(formField.value)}
                     placeholder={formField.label}
                     onChange={onChange}
                 />
                 <Label htmlFor={formField.id}>{formField.label}</Label>
             </Field>
-            <CopyToClipboardButton value={formField.value} position={3}>
+            <CopyToClipboardButton value={convertFieldValueToStringValue(formField.value)} position={3}>
                 Copy
             </CopyToClipboardButton>
         </InputGroup>
