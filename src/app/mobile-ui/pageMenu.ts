@@ -1,6 +1,7 @@
 'use client'
-
+import { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { config } from "@/lib/web-config"
+import { FormField } from "@/lib/global-input-mobile"
 
 export const FIELDS = {
   home: {
@@ -92,7 +93,7 @@ export const FIELDS = {
   },
 }
 
-export const onFieldChange = (field: { id: string }, navigate: (path: string) => void) => {
+export const onFieldChange = (field:FormField, navigate: { (href: string, options?: NavigateOptions): void; (arg0: string): void; }) => {
   switch (field.id) {
     case FIELDS.home.id:
       navigate("/")

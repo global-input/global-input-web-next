@@ -1,13 +1,17 @@
-import type { Metadata } from 'next'
-import StyledComponentsRegistry from '@/lib/registry';
+import type { Metadata, Viewport } from 'next'
+import StyledComponentsRegistry from '@/lib/registry'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
 })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
   title: {
@@ -17,7 +21,6 @@ export const metadata: Metadata = {
   description: 'Enable your web applications to use mobile devices as a second screen experience for seamless data transfer, authentication, and control.',
   keywords: ['second screen', 'mobile authentication', 'data transfer', 'mobile control', 'web security'],
   authors: [{ name: 'Iterative Solution' }],
-  viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -39,11 +42,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.className}>
       <body className="min-h-screen bg-white text-black antialiased">
-        <div className="flex min-h-screen flex-col">
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </div>
+        <StyledComponentsRegistry>
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   )

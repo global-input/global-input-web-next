@@ -1,4 +1,4 @@
-import type { Images } from '@/types'
+import type { Images, IconDefinition } from '@/types'
 
 const images: Images = {
   logo: "/images/logo.png",

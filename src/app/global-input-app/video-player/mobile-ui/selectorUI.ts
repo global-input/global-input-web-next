@@ -1,3 +1,4 @@
+import type {MobileData} from '@/lib/global-input-mobile';
 import * as microAppsUI from '@/lib/micro-apps/mobile-ui';
 
 export const initDataId = "second-screen-video-selector";
@@ -71,10 +72,10 @@ export const initData = (videoData: VideoData) => ({
 });
 
 
-export const sendTitle = (mobile, title: string) => {
+export const sendTitle = (mobile:MobileData, title: string) => {
     mobile.sendValue(fields.title.id, titleValue(title));
 };
 
-export const sendSynopsis = (mobile, synopsis: string) => {
+export const sendSynopsis = (mobile:MobileData, synopsis: string) => {
     mobile.sendValue(fields.synopsis.id, synopsis);
 }

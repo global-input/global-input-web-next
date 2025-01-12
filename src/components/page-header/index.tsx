@@ -9,7 +9,7 @@ interface Props {
   selected?: string | null;
 }
 
-const appTitle = config.id === "iterative" ? "Iterative Solution" : "Global Input App"
+const appTitle =  "Global Input App";
 
 export function PageHeader({ selected }: Props) {
   const [menuPressed, setMenuPressed] = useState(false)

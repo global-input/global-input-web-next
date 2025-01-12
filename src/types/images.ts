@@ -39,7 +39,7 @@ interface DeviceImages {
     };
   }
   
-  interface IconDefinition {
+  export interface IconDefinition {
     name: string;
     image: string;
   }

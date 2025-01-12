@@ -1,4 +1,6 @@
 import { config } from '@/lib/web-config'
+import { FormField } from '@/lib/global-input-mobile';
+import { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 export const FIELDS = {
   encryption: {
@@ -39,7 +41,7 @@ export const FIELDS = {
   },
 };
 
-export const onFieldChange = (field, navigate) => {
+export const onFieldChange = (field:FormField, navigate: { (href: string, options?: NavigateOptions): void; (arg0: string): void; }) => {
   switch (field.id) {
     case FIELDS.encryption.id:
       navigate(config.paths.examples.mobileEncryption.path);
