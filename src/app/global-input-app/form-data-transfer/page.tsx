@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import * as storage from './storage';
@@ -29,7 +29,8 @@ import {
 
 import { DisplayInputField, AddNewField } from './forms';
 
-const FormDataTransfer = () => {
+// Separate the form content into its own component
+function FormContent() {
     const searchParams = useSearchParams();
     const [domain, setDomain] = useState(loadDomain);
     const [configId, setConfigId] = useState(0);
@@ -69,14 +70,13 @@ const FormDataTransfer = () => {
     });
 
     useEffect(() => {
-        // Convert searchParams to location-like object for compatibility
-        if (searchParams.size > 0) {  // Only process if there are search parameters
+        if (searchParams.size > 0) {
             const location = {
                 search: `?${searchParams.toString()}`
             };
             loadFormFromQueryString(setDomain, onFormModified, location);
         }
-    }, [searchParams, setDomain, onFormModified]);
+    }, [searchParams]);
 
     return (
         <AppContainer>
@@ -138,11 +138,27 @@ const FormDataTransfer = () => {
             </ConnectContainer>
         </AppContainer>
     );
-};
+}
+
+// Loading fallback component
+function FormLoadingState() {
+    return (
+        <AppContainer>
+            <div>Loading form data...</div>
+        </AppContainer>
+    );
+}
 
 const loadDomain = () => {
     const domain = storage.getDomain();
     return domain ? domain : "globalinput.co.uk";
 };
 
-export default FormDataTransfer;
+// Main page component with Suspense boundary
+export default function FormDataTransfer() {
+    return (
+        <Suspense fallback={<FormLoadingState />}>
+            <FormContent />
+        </Suspense>
+    );
+}

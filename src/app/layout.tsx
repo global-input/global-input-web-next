@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import StyledComponentsRegistry from '@/lib/registry'
 import { Inter } from 'next/font/google'
+import { UpdateNotification } from '@/components/reloader'
 import './globals.css'
 
 const inter = Inter({
@@ -45,6 +46,7 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="min-h-screen bg-white text-black antialiased">
         <StyledComponentsRegistry>
+          <UpdateNotification />
           {children}
         </StyledComponentsRegistry>
       </body>

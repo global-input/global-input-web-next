@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /static/*
+Sitemap: https://globalinput.co.uk/sitemap.xml

@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  sw: 'service-worker.js',
+  buildExcludes: [/middleware-manifest\.json$/],
+  // Remove buildId and use cacheId if needed
+  cacheId: 'global-input-web'
+})
+
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
@@ -13,7 +24,6 @@ const nextConfig = {
     config.externals = [...config.externals, { canvas: 'canvas' }];
     return config;
   },
-
 };
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);
