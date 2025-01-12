@@ -5,9 +5,8 @@ const withPWA = require('next-pwa')({
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
   sw: 'service-worker.js',
-  buildExcludes: [/middleware-manifest\.json$/],
-  // Remove buildId and use cacheId if needed
-  cacheId: 'global-input-web'
+  swSrc: 'worker/index.js', // Use our custom service worker
+  buildExcludes: [/middleware-manifest\.json$/]
 })
 
 const nextConfig = {
