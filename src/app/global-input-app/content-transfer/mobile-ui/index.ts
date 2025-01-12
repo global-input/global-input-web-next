@@ -6,6 +6,7 @@ import * as mobileUI from '@/lib/micro-apps/mobile-ui';
 
 export { ConnectWidget };
 
+// Improved type definitions
 interface ContentField {
     id: string;
     label: string;
@@ -19,7 +20,27 @@ interface InfoField {
     value: string;
 }
 
-const FIELDS = {
+interface Field {
+    id: string;
+    value?: string | number;
+    type?: string;
+}
+
+interface FormData {
+    id: string;
+    form: {
+        title: string;
+        fields: Array<ContentField | InfoField>;
+    };
+}
+
+// Constants in a separate object for better organization
+const FORM_CONFIG = {
+    id: 'content-transfer-example',
+    title: 'Content Transfer',
+} as const;
+
+export const FIELDS = {
     contentField: {
         id: "content",
         label: "Content",
@@ -33,41 +54,67 @@ const FIELDS = {
     } as InfoField
 };
 
+// Register fields with mobileUI
 mobileUI.add(FIELDS);
 
-const initData = {
-    id: 'content-transfer-example',
+// Build initial data with type safety
+const buildInitData = (): FormData => ({
+    id: FORM_CONFIG.id,
     form: {
-        title: "Content Transfer",
+        title: FORM_CONFIG.title,
         fields: Object.values(FIELDS)
     }
-};
+});
 
 interface UseConnectMobileProps {
     setContent: (content: string) => void;
 }
 
-export const useConnectMobile = ({ setContent }: UseConnectMobileProps) => {
+interface UseConnectMobileResult {
+    mobile: ReturnType<typeof useMobile>;
+    onContentChanged: (content: string) => void;
+}
+
+export const useConnectMobile = ({ setContent }: UseConnectMobileProps): UseConnectMobileResult => {
     const router = useRouter();
-    const mobile = useMobile(initData, true);
+    const mobile = useMobile(buildInitData, true);
 
-    mobile.setOnchange(({ field }) => {
-        switch (field.id) {
-            case FIELDS.contentField.id:
-                setContent(field.value as string);
-                break;
-            default:
-                        if (field.id) {
-                            mobileUI.onFieldChange(field, (path) => {
-                                return router.push(path);
-                            });
-                
-                }
+    const handleFieldChange = (field: Field) => {
+        try {
+            switch (field.id) {
+                case FIELDS.contentField.id:
+                    if (typeof field.value === 'string') {
+                        setContent(field.value);
+                    }
+                    break;
+                default:
+                    if (field.id) {
+                        mobileUI.onFieldChange(field, (path: string) => {
+                            try {
+                                router.push(path);
+                                return true;
+                            } catch (error) {
+                                console.error('Navigation error:', error);
+                                return false;
+                            }
+                        });
+                    }
+            }
+        } catch (error) {
+            console.error('Error handling field change:', error);
+            // You could add error handling UI feedback here
         }
-    });
+    };
 
-    const onContentChanged = (content: string) => {
-        mobile.sendValue(FIELDS.contentField.id, content);
+    mobile.setOnchange(({ field }) => handleFieldChange(field));
+
+    const onContentChanged = (content: string): void => {
+        try {
+            mobile.sendValue(FIELDS.contentField.id, content);
+        } catch (error) {
+            console.error('Error sending content value:', error);
+            // You could add error handling UI feedback here
+        }
     };
 
     return { mobile, onContentChanged };
