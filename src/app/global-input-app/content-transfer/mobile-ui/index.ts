@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useMobile, ConnectWidget } from '@/lib/global-input-mobile';
 import * as mobileUI from '@/lib/micro-apps/mobile-ui';
+import type {FormField} from '@/lib/global-input-mobile';
 
 export { ConnectWidget };
 
@@ -20,11 +21,6 @@ interface InfoField {
     value: string;
 }
 
-interface Field {
-    id: string;
-    value?: string | number;
-    type?: string;
-}
 
 interface FormData {
     id: string;
@@ -79,7 +75,7 @@ export const useConnectMobile = ({ setContent }: UseConnectMobileProps): UseConn
     const router = useRouter();
     const mobile = useMobile(buildInitData, true);
 
-    const handleFieldChange = (field: Field) => {
+    const handleFieldChange = (field: FormField) => {
         try {
             switch (field.id) {
                 case FIELDS.contentField.id:
