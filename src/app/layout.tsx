@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import StyledComponentsRegistry from '@/lib/registry'
+
 import { Inter } from 'next/font/google'
-import { UpdateNotification } from '@/components/reloader'
+import UpdateNotification, { onServiceWorkerUpdate } from './UpdateNotification';
+import { register } from './sw';
+
 import './globals.css'
 
 const inter = Inter({
@@ -13,7 +15,9 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 }
-
+if (typeof window !== 'undefined') {
+  register({ onUpdate: onServiceWorkerUpdate });
+}
 export const metadata: Metadata = {
   title: {
     template: '%s | Global Input App',
@@ -45,10 +49,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body className="min-h-screen bg-white text-black antialiased">
-        <StyledComponentsRegistry>
+        
           <UpdateNotification />
           {children}
-        </StyledComponentsRegistry>
+        
       </body>
     </html>
   )
