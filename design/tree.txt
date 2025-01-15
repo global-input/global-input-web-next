@@ -1,11 +1,4 @@
 .
-├── README.md
-├── architecture
-│   ├── serviceWorkerfix.txt
-│   └── serviceWorkwrs.md
-├── design
-│   ├── form_encryption.md
-│   └── tree.txt
 ├── eslint.config.mjs
 ├── next-env.d.ts
 ├── next.config.js
@@ -182,4 +175,4 @@
 ├── tailwind.config.ts
 └── tsconfig.json
 
-49 directories, 134 files
+

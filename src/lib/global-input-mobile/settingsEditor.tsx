@@ -212,7 +212,8 @@ export const SettingsEditor = ({
   const onSave = () => saveSettings(settings)
 
   return (
-    <div className="flex flex-col justify-start items-start p-2.5 w-[80vw] max-w-[390px] bg-white overflow-scroll h-[65vh] min-h-[300px] min-[400px]:h-[320px] min-[450px]:h-[350px] min-[600px]:h-[425px]">
+    
+    <div className="flex flex-col justify-start items-start p-2.5 w-[80vw] max-w-[390px] bg-white text-black overflow-scroll h-[65vh] min-h-[300px] min-[400px]:h-[320px] min-[450px]:h-[350px] min-[600px]:h-[425px]">
       <SecurityGroupField
         settings={settings}
         setSettings={setSettings}
