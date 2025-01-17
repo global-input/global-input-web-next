@@ -60,7 +60,7 @@ export function PageHeader({ selected }: Props) {
               alt="Company Logo"
               width={32}
               height={32}
-              className="object-none"
+              className="object-contain"
             />
             <h3 className="text-[#5291cd] whitespace-nowrap font-light pl-2.5 text-xs sm:text-sm md:text-base lg:text-xl">
               Iterative Solution
@@ -75,7 +75,7 @@ export function PageHeader({ selected }: Props) {
               alt="App Logo"
               width={32}
               height={32}
-              className="object-none"
+              className="object-contain"
             />
             <h3 className="text-[#5291cd] whitespace-nowrap font-light pl-2.5 text-xs sm:text-sm md:text-base lg:text-xl">
               {appTitle}

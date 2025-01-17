@@ -11,7 +11,7 @@ import {
   Column,
   Title,
   Row2,
-} from "./components/layout";
+} from "./components/StyledComponents";
 
 export default function MobileContentTransfer() {
   return (

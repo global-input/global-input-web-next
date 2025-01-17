@@ -11,7 +11,7 @@ import {
   Column,
   Title,
   Row,
-} from "./components/layout";
+} from "./components/StyledComponents";
 
 export default function SecondScreenExperience() {
   return (

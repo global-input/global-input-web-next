@@ -14,7 +14,7 @@ import {
   Title,
   Row,
   Row2,
-} from "./components/layout";
+} from "./components/StyledComponents";
 
 export default function MobileEncryption() {
   return (
