@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import UpdateNotification, { onServiceWorkerUpdate } from './UpdateNotification';
 import { register } from './sw';
-
+import StyledComponentsRegistry from '../lib/registry';
 import './globals.css'
 
 const inter = Inter({
@@ -51,7 +51,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white text-black antialiased">
         
           <UpdateNotification />
-          {children}
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         
       </body>
     </html>
