@@ -6,6 +6,14 @@ const nextConfig = {
   },
   images: {
     unoptimized: true // Required for static export
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/:path*/index.html',
+        destination: '/:path*'
+      }
+    ];
   }
 }
 
