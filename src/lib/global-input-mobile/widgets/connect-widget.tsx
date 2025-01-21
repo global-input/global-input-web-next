@@ -161,10 +161,8 @@ export const ConnectWidget = ({ mobile }: ConnectWidgetProps) => {
             loadSettings={loadSettings}
           />
         )}
-
-        
-
-        <AppQROverlay
+      </div>
+      <AppQROverlay
           showOverlay={showGlobalInputQRCode}
           onOverlayClick={handleOverlayClick}
           onContainerClick={stopPropagation}
@@ -173,7 +171,6 @@ export const ConnectWidget = ({ mobile }: ConnectWidgetProps) => {
           }}
           qrValue={appLaunchedData.globalInputUrl}
         />
-      </div>
     </div>
   )
 }
@@ -201,7 +198,8 @@ export const ConnectWindow = ({ mobile }: ConnectWidgetProps) => {
 
   return (
     <div
-      className="bg-[#0009] flex m-0 p-0 fixed z-10 w-screen h-screen flex-col items-center justify-end min-[800px]:justify-center top-0 left-0 animate-[fadeIn_500ms_cubic-bezier(0.230,1.000,0.320,1.000)]"
+       className="bg-[#0009] flex m-0 fixed z-10 w-screen h-screen flex-col items-center justify-end min-[800px]:justify-center top-0 left-0 animate-[fadeIn_500ms_cubic-bezier(0.230,1.000,0.320,1.000)] pb-32"
+      
       onClick={(e) => mobile.setShowWidget(e.target !== e.currentTarget)}
     >
       <div className="flex flex-col justify-center relative">
