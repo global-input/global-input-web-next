@@ -137,7 +137,7 @@ export const GenerateQRCode: React.FC<Props> = ({ content, label, back }) => {
                 showOverlay={showGlobalInputQRCode}
                 onOverlayClick={handleOverlayClick}
                 onContainerClick={stopPropagation}
-                qrValue={"https://globalinput.co.uk/global-input-app/mobile-app"}
+                qrValue={"https://app.globalinput.co.uk/global-input-app/mobile-app"}
             />
 
             <Footer>
