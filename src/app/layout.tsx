@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-
 import { Inter } from 'next/font/google'
-import UpdateNotification, { onServiceWorkerUpdate } from './UpdateNotification';
-import { register } from './sw';
-import StyledComponentsRegistry from '../lib/registry';
+import { PWAUpdatePrompt } from '@/components/PWAUpdatePrompt'
+import StyledComponentsRegistry from '../lib/registry'
 import './globals.css'
 
 const inter = Inter({
@@ -15,9 +13,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 }
-if (typeof window !== 'undefined') {
-  register({ onUpdate: onServiceWorkerUpdate });
-}
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Global Input App',
@@ -53,11 +49,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
+      <script dangerouslySetInnerHTML={{
+  __html: `
+    console.log("Page loaded, checking service worker...");
+    if ('serviceWorker' in navigator) {
+      console.log("Service Worker API is available");
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        console.log("Found registrations:", registrations);
+      });
+    } else {
+      console.log("Service Worker API is not available");
+    }
+  `
+}} />
       <body className="min-h-screen bg-white text-black antialiased">
-        
-          <UpdateNotification />
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        
+        <StyledComponentsRegistry>
+          {children}
+          <PWAUpdatePrompt />
+        </StyledComponentsRegistry>
       </body>
     </html>
   )
