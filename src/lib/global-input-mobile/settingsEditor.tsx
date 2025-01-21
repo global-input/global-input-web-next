@@ -12,8 +12,8 @@ const Button = ({ onClick, children }: {
   <button
     onClick={onClick}
     className={`
-      text-decoration-none text-xs rounded-lg text-[#4281bd] bg-white whitespace-nowrap
-      p-2.5 flex flex-row justify-center items-center border-[#eeeeee]
+      text-decoration-none text-xs rounded-lg text-[#4281bd] bg-blue whitespace-nowrap 
+      p-2.5 flex flex-row justify-center items-center border  border-[#4281bd]
       min-w-[50px] max-w-[200px] mx-1.5
       shadow-[0px_8px_15px_rgba(0,0,0,0.1)]
       transition-all duration-300 ease-in-out cursor-pointer

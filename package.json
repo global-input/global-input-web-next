@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:static": "rm -rf out && next build  && npm run generate-sw",
+    "build:static": "rm -rf out && next build && npm run generate-sw && npm run post-build",
     "generate-sw": "workbox generateSW workbox-config.js",
-    "deploy:s3": "aws s3 sync out/ s3://YOUR-BUCKET-NAME --delete",
+    "post-build": "cp out/sw.js out/404.html out/",
+    "deploy:s3": "aws s3 sync out/ s3://YOUR-BUCKET-NAME --delete --cache-control max-age=31536000,public",
     "invalidate:cdn": "aws cloudfront create-invalidation --distribution-id YOUR-DISTRIBUTION-ID --paths \"/*\""
   },
   "dependencies": {

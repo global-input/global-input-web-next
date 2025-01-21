@@ -73,16 +73,14 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
 
 export function register() {
   if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
-    const swUrl = '/service-worker.js';
+    const swUrl = '/sw.js';  // Match the filename in workbox-config.js
     
     window.addEventListener("load", () => {
       if (window.location.hostname === 'localhost') {
-        // This is running on localhost. Check if a service worker still exists or not.
         checkValidServiceWorker(swUrl, {
           onUpdate: onServiceWorkerUpdate
         });
       } else {
-        // Is not localhost. Just register service worker
         registerValidSW(swUrl, {
           onUpdate: onServiceWorkerUpdate
         });

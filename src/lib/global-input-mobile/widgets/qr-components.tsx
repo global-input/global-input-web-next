@@ -10,7 +10,7 @@ const ButtonLike = ({ onClick, children }: {
   <button
     onClick={onClick}
     className={`
-      text-white bg-[rgb(220,228,237)] border-none rounded 
+      text-white bg-[rgb(24,47,73)] border-none rounded 
       px-2 py-0.5 text-inherit no-underline cursor-pointer 
       inline-block border border-dotted border-[#ccc] 
       text-[#4872d3] ml-[5px]
@@ -27,7 +27,7 @@ const A = ({ onClick, children }: {
 }) => (
   <span
     onClick={onClick}
-    className="text-[#4872d3] underline cursor-pointer ml-[5px]"
+    className="text-[#285dd7] underline cursor-pointer ml-[5px]"
   >
     {children}
   </span>
