@@ -154,7 +154,7 @@ export const ConnectWidget = ({ mobile }: ConnectWidgetProps) => {
             }
           />
         )}
-
+{message}
         {widgetState === WidgetState.SETTINGS && (
           <SettingsEditor
             saveSettings={onSaveSettings}
@@ -162,7 +162,7 @@ export const ConnectWidget = ({ mobile }: ConnectWidgetProps) => {
           />
         )}
 
-        {message}
+        
 
         <AppQROverlay
           showOverlay={showGlobalInputQRCode}
