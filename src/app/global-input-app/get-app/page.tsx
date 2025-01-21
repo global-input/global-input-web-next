@@ -21,7 +21,7 @@ const ButtonLink = ({ href, children }: { href: string, children: React.ReactNod
 )
 
 const WebAppBadge = () => (
-  <Link href="/global-input-app/mobile-app">
+  <ButtonLink href="https://app.globalinput.co.uk/global-input-app/mobile-app" >
     <div className="w-[145px] h-[48px] cursor-pointer hover:opacity-80">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145 48">
         <rect width="145" height="48" rx="8" fill="#000000"/>
@@ -31,7 +31,7 @@ const WebAppBadge = () => (
         <text x="42" y="28" fontFamily="Arial, sans-serif" fontSize="16" fill="#FFFFFF" fontWeight="500">Web App</text>
       </svg>
     </div>
-  </Link>
+  </ButtonLink>
 )
 
 export default function GetAppPage() {
