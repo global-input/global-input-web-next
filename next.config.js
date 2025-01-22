@@ -1,41 +1,57 @@
-/** @type {import('next').NextConfig} */
 const withPWA = require('next-pwa')({
-  dest: 'out',
-  sw: 'service-worker.js', 
+  dest: 'public',
   register: false,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
   runtimeCaching: [
     {
-      urlPattern: /^https:\/\/fonts\./,
-      handler: 'CacheFirst',
+      urlPattern: ({ request, url }) => request.mode === 'navigate',
+      handler: 'NetworkFirst',
       options: {
-        cacheName: 'google-fonts',
+        cacheName: 'pages',
+        plugins: [
+          {
+            handlerDidError: async () => {
+              return caches.match('/offline.html');
+            }
+          }
+        ]
+      }
+    },
+    {
+      urlPattern: /^https?.*/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'https-calls',
+        networkTimeoutSeconds: 15,
         expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60  // 365 days
+          maxEntries: 150,
+          maxAgeSeconds: 30 * 24 * 60 * 60
+        },
+        cacheableResponse: {
+          statuses: [0, 200]
         }
       }
     },
     {
-      urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
+      urlPattern: /\/_next\/image\?url=.+/i,
       handler: 'StaleWhileRevalidate',
       options: {
-        cacheName: 'static-font-assets',
+        cacheName: 'next-image',
         expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 7 * 24 * 60 * 60  // 7 days
+          maxEntries: 64,
+          maxAgeSeconds: 24 * 60 * 60
         }
       }
     },
     {
-      urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
+      urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/i,
       handler: 'CacheFirst',
       options: {
-        cacheName: 'static-image-assets',
+        cacheName: 'static-images',
         expiration: {
           maxEntries: 64,
-          maxAgeSeconds: 30 * 24 * 60 * 60  // 30 days
+          maxAgeSeconds: 24 * 60 * 60
         }
       }
     },
@@ -43,39 +59,11 @@ const withPWA = require('next-pwa')({
       urlPattern: /\.(?:js|css)$/i,
       handler: 'StaleWhileRevalidate',
       options: {
-        cacheName: 'static-js-assets',
-        expiration: {
-          maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60  // 24 hours
-        }
-      }
-    },
-    {
-      urlPattern: /\.(?:json|xml|csv)$/i,
-      handler: 'NetworkFirst',
-      options: {
-        cacheName: 'static-data-assets',
-        expiration: {
-          maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60  // 24 hours
-        }
-      }
-    },
-    {
-      urlPattern: /.*/i,
-      handler: 'NetworkFirst',
-      options: {
-        cacheName: 'others',
-        expiration: {
-          maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60  // 24 hours
-        },
-        networkTimeoutSeconds: 10
+        cacheName: 'static-resources'
       }
     }
   ]
 })
-
 const nextConfig = {
   output: 'export',  // For static site generation
   compiler: {

@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import { PWAUpdatePrompt } from '@/components/PWAUpdatePrompt'
+import PWAUpdatePrompt from '@/components/PWAUpdatePrompt'
 import StyledComponentsRegistry from '../lib/registry'
+import { ServiceWorkerInitializer } from './ServiceWorkerInitializer'
 import './globals.css'
 
 const inter = Inter({
@@ -49,23 +50,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <script dangerouslySetInnerHTML={{
-  __html: `
-    console.log("Page loaded, checking service worker...");
-    if ('serviceWorker' in navigator) {
-      console.log("Service Worker API is available");
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        console.log("Found registrations:", registrations);
-      });
-    } else {
-      console.log("Service Worker API is not available");
-    }
-  `
-}} />
       <body className="min-h-screen bg-white text-black antialiased">
         <StyledComponentsRegistry>
           {children}
-          <PWAUpdatePrompt />
+          <PWAUpdatePrompt /> 
+          <ServiceWorkerInitializer />
         </StyledComponentsRegistry>
       </body>
     </html>

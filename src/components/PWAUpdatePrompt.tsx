@@ -1,86 +1,60 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
-const UpdateButton = styled.button`
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: #323232;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  border: none;
-  cursor: pointer;
-  z-index: 9999;
-  
-  &:hover {
-    background: #424242;
-  }
-`;
-
-export function PWAUpdatePrompt() {
+export default function PWAUpdatePrompt() {
+  const [waitingWorker, setWaitingWorker] = useState<ServiceWorker | null>(null);
   const [showReload, setShowReload] = useState(false);
-  const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      const registerSW = async () => {
+      const registerServiceWorker = async () => {
         try {
           const registration = await navigator.serviceWorker.register('/service-worker.js', {
             scope: '/'
           });
-          console.log('Service Worker registered successfully');
-          
-          setRegistration(registration);
 
-          // Check for existing waiting service worker
-          if (registration.waiting) {
-            setShowReload(true);
-          }
-
-          // Listen for new updates
-          registration.addEventListener('updatefound', () => {
-            const installingWorker = registration.installing;
-            if (installingWorker) {
-              installingWorker.addEventListener('statechange', () => {
-                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  setShowReload(true);
-                }
-              });
+          registration.addEventListener('waiting', event => {
+            if (registration.waiting) {
+              setWaitingWorker(registration.waiting);
+              setShowReload(true);
             }
           });
 
+          // Handle updates
+          registration.addEventListener('controlling', event => {
+            window.location.reload();
+          });
+
+          // Check if there's an existing waiting worker
+          if (registration.waiting) {
+            setWaitingWorker(registration.waiting);
+            setShowReload(true);
+          }
         } catch (error) {
           console.error('Service Worker registration failed:', error);
         }
       };
 
-      registerSW();
-
-      // Handle controller change (when skipWaiting is called)
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (showReload) {
-          window.location.reload();
-        }
-      });
+      registerServiceWorker();
     }
-  }, [showReload]);
+  }, []);
 
   const reloadPage = () => {
-    if (registration?.waiting) {
-      // Notify the waiting Service Worker to take control
-      registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-    }
+    waitingWorker?.postMessage({ type: 'SKIP_WAITING' });
+    setShowReload(false);
+    window.location.reload();
   };
 
-  if (!showReload) return null;
-
-  return (
-    <UpdateButton onClick={reloadPage}>
-      Update available
-    </UpdateButton>
-  );
+  return showReload ? (
+    <div className="fixed bottom-0 left-0 right-0 bg-blue-500 text-white p-4 flex justify-between items-center">
+      <p>A new version is available!</p>
+      <button
+        onClick={reloadPage}
+        className="bg-white text-blue-500 px-4 py-2 rounded hover:bg-blue-100"
+      >
+        Reload
+      </button>
+    </div>
+  ) : null;
 }
