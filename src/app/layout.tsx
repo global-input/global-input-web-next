@@ -1,9 +1,17 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import PWAUpdatePrompt from '@/components/PWAUpdatePrompt'
+
 import StyledComponentsRegistry from '../lib/registry'
+import dynamic from 'next/dynamic'
+
+
+
 
 import './globals.css'
+
+const PWAUpdatePrompt = dynamic(() => import('@/components/PWAUpdatePrompt'), {
+  ssr: false
+});
 
 const inter = Inter({
   subsets: ['latin'],
