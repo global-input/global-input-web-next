@@ -6,7 +6,10 @@ const nextConfig = {
   },
   images: {
     unoptimized: true
-  }  
+  },
+  env: {
+    BUILD_ID: process.env.BUILD_ID || 'default-build-id',
+  },  
 }
 
 export default nextConfig;

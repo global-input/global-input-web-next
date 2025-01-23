@@ -7,6 +7,7 @@ export function ServiceWorkerInitializer() {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.addEventListener('message', (event) => {
+        console.log("****ServiceWorker message", event.data);
         if (event.data.type === 'UPDATE_AVAILABLE') {
           const registration = navigator.serviceWorker.ready.then(registration => {
             if (registration.waiting) {

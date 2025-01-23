@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:static": "rm -rf out && next build",
-    "deploy:s3": "aws s3 sync out/ s3://YOUR-BUCKET-NAME --delete --cache-control max-age=31536000,public",
+    "build:static": "rm -rf out && next build && node scripts/update-service-worker.js",
     "invalidate:cdn": "aws cloudfront create-invalidation --distribution-id YOUR-DISTRIBUTION-ID --paths \"/*\""
   },
   "dependencies": {
