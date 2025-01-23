@@ -4,7 +4,7 @@ const CACHE_NAME = self.__WB_MANIFEST ?
   `app-cache-${self.__WB_MANIFEST[0].url.split('/')[3]}-${Date.now()}` : 
   `app-cache-v1-${Date.now()}`;
 
-let cachesToRemove = [];
+
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -27,29 +27,26 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then(async (cacheNames) => {
-      cachesToRemove = cacheNames.filter(
-        cacheName => cacheName.startsWith('app-cache-') && cacheName !== CACHE_NAME
-      );
-      const clients = await self.clients.matchAll();
-      clients.forEach(client => {
-        client.postMessage({ type: 'UPDATE_AVAILABLE' });
-      });
-    })
-  );
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const clients = await self.clients.matchAll();
+    clients.forEach(client => {
+      client.postMessage({ type: 'UPDATE_AVAILABLE' });
+    });
+    self.clients.claim();
+  })());
 });
 
 self.addEventListener('message', async (event) => {  
   if (event.data.type === 'START_UPDATE') {
     console.log("START_UPDATE is received by the service worker");
-    for (const cache of cachesToRemove) {
-      await caches.delete(cache);
-    }
-    cachesToRemove = [];
+    caches.keys().then(async (cacheNames) => {
+      for (const cacheName of cacheNames) {
+        await caches.delete(cacheName);
+      }
+    })        
     console.log("Caches are deleted");
-    const clients = await self.clients.matchAll();
+    const clients = await self.clients.matchAll({ includeUncontrolled: true, type: 'window' });
+    console.log("looping through clients: ", clients);
     clients.forEach(client => {
       console.log("Sending CACHE_DELETED to the application...");
       client.postMessage({ type: 'CACHE_DELETED' });

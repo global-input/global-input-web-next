@@ -8,7 +8,7 @@ import { HomePageClient } from './HomePageClient';
 
 // Static content that can be rendered on the server
 const headerTextContent = {
-  title: "Mobile Integration Framework!!",
+  title: "Mobile Integration Framework",
   subtitle:
     "Enable secure mobile capabilities in your applications with minimal code changes. Features encrypted QR authentication, dynamic mobile UI generation, and secure data exchange - perfect for streaming services, self-service systems, and IoT applications.",
 }
