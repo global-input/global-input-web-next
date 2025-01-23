@@ -52,8 +52,9 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="min-h-screen bg-white text-black antialiased">
         <StyledComponentsRegistry>
+        <PWAUpdatePrompt /> 
           {children}
-          <PWAUpdatePrompt /> 
+          
           <ServiceWorkerInitializer />
         </StyledComponentsRegistry>
       </body>

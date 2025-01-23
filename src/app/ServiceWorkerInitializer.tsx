@@ -1,17 +1,21 @@
-// ServiceWorkerInitializer.tsx
-'use client'
-import React from "react";
+// src/app/ServiceWorkerInitializer.tsx
+'use client';
+
+import { useEffect } from 'react';
 
 export function ServiceWorkerInitializer() {
-  React.useEffect(() => {
-    console.log("Page loaded, checking service worker...");
+  useEffect(() => {
     if ('serviceWorker' in navigator) {
-      console.log("Service Worker API is available");
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        console.log("Found registrations:", registrations);
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data.type === 'UPDATE_AVAILABLE') {
+          const registration = navigator.serviceWorker.ready.then(registration => {
+            if (registration.waiting) {
+              registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+              window.location.reload();
+            }
+          });
+        }
       });
-    } else {
-      console.log("Service Worker API is not available");
     }
   }, []);
 
