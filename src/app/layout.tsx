@@ -13,6 +13,7 @@ const inter = Inter({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover'
 }
 
 export const metadata: Metadata = {
@@ -22,12 +23,7 @@ export const metadata: Metadata = {
   },
   description: 'Enable your web applications to use mobile devices as a second screen experience for seamless data transfer, authentication, and control.',
   keywords: ['second screen', 'mobile authentication', 'data transfer', 'mobile control', 'web security'],
-  authors: [{ name: 'Iterative Solution' }],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    viewportFit: 'cover'
-  },
+  authors: [{ name: 'Iterative Solution' }], 
   icons: {
     icon: [
       { url: '/favicon.ico' },
