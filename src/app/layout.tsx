@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import PWAUpdatePrompt from '@/components/PWAUpdatePrompt'
 import StyledComponentsRegistry from '../lib/registry'
-import { ServiceWorkerInitializer } from './ServiceWorkerInitializer'
+
 import './globals.css'
 
 const inter = Inter({
@@ -55,7 +55,7 @@ export default function RootLayout({
         <PWAUpdatePrompt /> 
           {children}
           
-          <ServiceWorkerInitializer />
+          
         </StyledComponentsRegistry>
       </body>
     </html>
