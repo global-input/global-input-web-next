@@ -1,8 +1,7 @@
-// public/service-worker.js
-// const CACHE_NAME = 'app-cache-{{BUILD_ID}}';
+const BUILD_ID = '{{BUILD_ID}}';
 const CACHE_NAME = self.__WB_MANIFEST ? 
-  `app-cache-${self.__WB_MANIFEST[0].url.split('/')[3]}-${Date.now()}` : 
-  `app-cache-v1-${Date.now()}`;
+  `app-cache-${self.__WB_MANIFEST[0].url.split('/')[3]}-${BUILD_ID}` : 
+  `app-cache-v1-${BUILD_ID}`;
 
 
 
@@ -70,13 +69,7 @@ const isNextJsStaticFile = (url) => {
 };
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
-  if (isNextJsStaticFile(event.request.url)) {
-    // Always bypass cache for Next.js files:
-    event.respondWith(fetch(event.request));
-    return;
-  }
+  if (event.request.method !== 'GET' || event.request.url.endsWith('service-worker.js')) return;
 
   event.respondWith(
     (async () => {
