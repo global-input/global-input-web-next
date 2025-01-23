@@ -13,6 +13,7 @@ export default function PWAUpdatePrompt() {
     setIsUpdating(true);
     setError(null);
     try {
+      console.log("PWAUpdatePrompt: handleUpdate: sending START_UPDATE to waitingWorker");
       waitingWorker?.postMessage({ type: 'START_UPDATE' });
     } catch (err) {
       setError('Failed to update. Please refresh the page.');
@@ -50,6 +51,7 @@ export default function PWAUpdatePrompt() {
       navigator.serviceWorker.addEventListener('message', (event) => {
         switch(event.data.type) {
           case 'UPDATE_AVAILABLE':
+            console.log("UPDATE_AVAILABLE is received by the application");
             navigator.serviceWorker.ready.then(registration => {
               if (registration.waiting) {
                 setWaitingWorker(registration.waiting);
@@ -58,10 +60,13 @@ export default function PWAUpdatePrompt() {
             });
             break;
           case 'CACHE_DELETED':
+            console.log("application received CACHE_DELETED message");
+            setIsUpdating(false);
+            console.log("PWAUpdatePrompt: CACHE_DELETED: sending SKIP_WAITING to waitingWorker");
             waitingWorker?.postMessage({ type: 'SKIP_WAITING' });
             break;
           case 'VERSION_ACTIVATED':
-            setShowReload(false);
+            console.log("application received VERSION_ACTIVATED message");
             window.location.reload();
             break;
         }

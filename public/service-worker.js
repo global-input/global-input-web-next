@@ -4,7 +4,7 @@ const CACHE_NAME = self.__WB_MANIFEST ?
   `app-cache-${self.__WB_MANIFEST[0].url.split('/')[3]}-${Date.now()}` : 
   `app-cache-v1-${Date.now()}`;
 
-let cacheToDelete = null;
+let cachesToRemove = [];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -29,36 +29,38 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(async (cacheNames) => {
-      const obsoleteCaches = cacheNames.filter(cacheName => 
-        cacheName.startsWith('app-cache-') && cacheName !== CACHE_NAME
+      cachesToRemove = cacheNames.filter(
+        cacheName => cacheName.startsWith('app-cache-') && cacheName !== CACHE_NAME
       );
-      
-      if (obsoleteCaches.length) {
-        await Promise.all(obsoleteCaches.map(cache => caches.delete(cache)));
-        const clients = await self.clients.matchAll();
-        clients.forEach(client => {
-          client.postMessage({ type: 'VERSION_ACTIVATED' });
-        });
-      }
+      const clients = await self.clients.matchAll();
+      clients.forEach(client => {
+        client.postMessage({ type: 'UPDATE_AVAILABLE' });
+      });
     })
   );
   self.clients.claim();
 });
 
 self.addEventListener('message', async (event) => {  
-  console.log("**********", event.data.type);
-  console.log("**********", cacheToDelete);
-  if (event.data.type === 'START_UPDATE' && cacheToDelete) {
-    await caches.delete(cacheToDelete);
+  if (event.data.type === 'START_UPDATE') {
+    console.log("START_UPDATE is received by the service worker");
+    for (const cache of cachesToRemove) {
+      await caches.delete(cache);
+    }
+    cachesToRemove = [];
+    console.log("Caches are deleted");
     const clients = await self.clients.matchAll();
     clients.forEach(client => {
+      console.log("Sending CACHE_DELETED to the application...");
       client.postMessage({ type: 'CACHE_DELETED' });
     });
   }
   if (event.data.type === 'SKIP_WAITING') {
+    console.log("SKIP_WAITING is received by the service worker");
     await self.skipWaiting();
     const clients = await self.clients.matchAll();
     clients.forEach(client => {
+      console.log("Sending VERSION_ACTIVATED to the application...");
       client.postMessage({ type: 'VERSION_ACTIVATED' });
     });
   }
@@ -73,13 +75,15 @@ const isNextJsStaticFile = (url) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
+  if (isNextJsStaticFile(event.request.url)) {
+    // Always bypass cache for Next.js files:
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   event.respondWith(
     (async () => {
       try {
-        if (isNextJsStaticFile(event.request.url)) {
-          return await fetch(event.request);
-        }
-
         const cachedResponse = await caches.match(event.request);
         if (cachedResponse) return cachedResponse;
 
