@@ -1,9 +1,8 @@
 // public/service-worker.js
 // const CACHE_NAME = 'app-cache-{{BUILD_ID}}';
 const CACHE_NAME = self.__WB_MANIFEST ? 
-  `app-cache-${self.__WB_MANIFEST[0].url.split('/')[3]}` : 
-  'app-cache-v1';
-
+  `app-cache-${self.__WB_MANIFEST[0].url.split('/')[3]}-${Date.now()}` : 
+  `app-cache-v1-${Date.now()}`;
 
 let cacheToDelete = null;
 
@@ -30,22 +29,25 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(async (cacheNames) => {
-      for (const cache of cacheNames) {
-        if (cache !== CACHE_NAME) {
-          cacheToDelete = cache;
-          const clients = await self.clients.matchAll();
-          clients.forEach(client => {
-            client.postMessage({ type: 'UPDATE_AVAILABLE' });
-          });
-          break;
-        }
+      const obsoleteCaches = cacheNames.filter(cacheName => 
+        cacheName.startsWith('app-cache-') && cacheName !== CACHE_NAME
+      );
+      
+      if (obsoleteCaches.length) {
+        await Promise.all(obsoleteCaches.map(cache => caches.delete(cache)));
+        const clients = await self.clients.matchAll();
+        clients.forEach(client => {
+          client.postMessage({ type: 'VERSION_ACTIVATED' });
+        });
       }
     })
   );
   self.clients.claim();
 });
 
-self.addEventListener('message', async (event) => {
+self.addEventListener('message', async (event) => {  
+  console.log("**********", event.data.type);
+  console.log("**********", cacheToDelete);
   if (event.data.type === 'START_UPDATE' && cacheToDelete) {
     await caches.delete(cacheToDelete);
     const clients = await self.clients.matchAll();

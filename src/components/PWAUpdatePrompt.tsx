@@ -7,16 +7,19 @@ export default function PWAUpdatePrompt() {
   const [waitingWorker, setWaitingWorker] = useState<ServiceWorker | null>(null);
   const [showReload, setShowReload] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleUpdate = async () => {
     setIsUpdating(true);
+    setError(null);
     try {
       waitingWorker?.postMessage({ type: 'START_UPDATE' });
-    } catch (error) {
-      console.error('Failed to start update:', error);
+    } catch (err) {
+      setError('Failed to update. Please refresh the page.');
       setIsUpdating(false);
     }
   };
+
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
@@ -68,7 +71,10 @@ export default function PWAUpdatePrompt() {
 
   return showReload ? (
     <div className="fixed bottom-0 left-0 right-0 bg-blue-500 text-white p-4 flex justify-between items-center">
-      <p>A new version is available!</p>
+      <div>
+        <p>A new version is available!</p>
+        {error && <p className="text-red-200 text-sm mt-1">{error}</p>}
+      </div>
       <button
         onClick={handleUpdate}
         disabled={isUpdating}
