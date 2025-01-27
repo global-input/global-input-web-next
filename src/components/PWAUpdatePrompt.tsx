@@ -23,7 +23,7 @@ export default function PWAUpdatePrompt() {
 
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
       const registerServiceWorker = async () => {
         try {
           const registration = await navigator.serviceWorker.register('/service-worker.js', {
