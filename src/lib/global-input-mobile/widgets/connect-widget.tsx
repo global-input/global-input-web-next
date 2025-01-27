@@ -70,14 +70,15 @@ export const ConnectWidget = ({ mobile }: ConnectWidgetProps) => {
   
   const [showGlobalInputQRCode, setShowGlobalInputQRCode] = useState(true)
 
-  if (isConnected || !isShowWidget) {
-    return null
-  }
+  
   useEffect(() => {
     if(isConnectionDenied || isError){
       setShowGlobalInputQRCode(false)
     }
   }, [isConnectionDenied, isError])
+  if (isConnected || !isShowWidget) {
+    return null
+  }
   let message = isConnectionDenied && (
     <ErrorMessage>
       You can only use one mobile app per session.{' '}
