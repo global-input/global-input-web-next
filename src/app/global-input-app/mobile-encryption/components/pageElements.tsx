@@ -15,7 +15,7 @@ export const AppContainer = ({ children }: { children: React.ReactNode }) => (
                 {children}
             </div>
         </div>
-        <div className="text-[#153E85] font-light font-georgia text-[8px] min-[150px]:text-xs min-[400px]:text-base print:hidden">
+        <div className="mx-4 px-4 text-[#153E85] font-light font-georgia text-[8px] min-[150px]:text-xs min-[400px]:text-base print:hidden">
             <a 
                 href="https://github.com/global-input/mobile-encryption"
                 rel="noreferrer noopener"
@@ -70,8 +70,7 @@ interface InstructionProps {
 
 function Instruction({ center = false, children }: InstructionProps) {
     return (
-        <div className={`
-            text-[10px] ${center ? 'self-center' : 'self-start'}
+        <div className={`text-[10px] ${center ? 'self-center' : 'self-start'}
             min-[250px]:text-base
             min-[380px]:text-base min-[380px]:mb-2.5
         `}>

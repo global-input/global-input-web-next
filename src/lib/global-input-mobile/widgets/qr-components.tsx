@@ -63,7 +63,7 @@ export const AppQROverlay = ({
   
   return (
     <div 
-      className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.8)] flex flex-col justify-center items-center pt-10"
+      className="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.8)] flex flex-col justify-center items-center pt-10 border-solid"
       onClick={onOverlayClick}
     >
       <div className="bg-white p-5 text-[#4872d3] text-base pt-5 pb-2.5 pl-2.5" onClick={onOverlayClick}>

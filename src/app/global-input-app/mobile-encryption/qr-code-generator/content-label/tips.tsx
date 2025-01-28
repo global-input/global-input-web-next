@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { Tips, TipTitle, Tip, TipContent, ConnectedInstruction } from '../../components';
 
 // Update the image imports to use Next.js public directory
-const encryptOnMobileImage = '/images/encrypt-on-mobile.png';
-const keysOnMobileImage = '/images/keys-on-mobile.png';
-const settingsOnMobileImage = '/images/settings-on-mobile.png';
+const encryptOnMobileImage = '/images/mobile-encryption/encrypt-on-mobile.png';
+const keysOnMobileImage = '/images/mobile-encryption/keys-on-mobile.png';
+const settingsOnMobileImage = '/images/mobile-encryption/settings-on-mobile.png';
 
 const EncryptOnMobileIcon = styled.img.attrs({
     src: encryptOnMobileImage,

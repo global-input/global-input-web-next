@@ -120,7 +120,7 @@ export const ConnectWidget = ({ mobile }: ConnectWidgetProps) => {
   }
 
   return (
-    <div className="flex flex-col justify-start items-start p-5 bg-white rounded-t-xl min-[800px]:rounded-xl">
+    <div className="flex flex-col justify-start items-start p-5 bg-white rounded-t-xl min-[800px]:rounded-xl relative">
       <div className="flex flex-row justify-between w-full items-end">
         <Tabs widgetState={widgetState} setWidgetState={setWidgetState} />
       </div>
