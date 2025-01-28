@@ -95,8 +95,11 @@ const RenderContentForm: React.FC<RenderContentFormProps> = ({ content, onConten
             />
             <Label htmlFor="contentToDecrypt">Content to Decrypt</Label>
             <Help expandId='contentToDecrypt' expand={expand} setExpand={setExpand}>
-                The content you have provided will be sent to your mobile app.
-                You mobile app will decrypt it and send back the result to this application.
+                
+            
+        How it works: when you enter encrypted content here, it will be sent to your mobile device for decryption. Your mobile app will decrypt the data using your device's secure keys and send the decrypted result back to this application. This ensures your sensitive information remains protected, as only your mobile device can decrypt it.
+                
+                
             </Help>
         </Field>
         <Footer>

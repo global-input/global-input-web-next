@@ -20,11 +20,30 @@ interface RenderContentFormProps {
     finish: () => void
 }
 
-const BulletPoint = ({ children }) => (
-    <li className="mb-2 flex items-start">
-        <span className="text-gray-600 mr-2">•</span>
-        <span>{children}</span>
-    </li>
+const SecurityTip = ({ children }) => (
+    <div className="flex items-start mb-2 last:mb-0">
+        <span className="text-[rgb(53,116,230)] mr-2 font-['Avenir']">•</span>
+        <span className="text-[rgb(53,116,230)] font-['Avenir'] flex-1">{children}</span>
+    </div>
+)
+
+const SecurityGuidance = () => (
+    <div className="space-y-3">
+        <p className="text-[rgb(53,116,230)] font-['Avenir']">
+            You can now store this encrypted content anywhere, knowing it can only be decrypted using your mobile device. For security best practices:
+        </p>
+        <div className="ml-1">
+            <SecurityTip>
+                Back up your encryption key by exporting it as an encrypted QR code
+            </SecurityTip>
+            <SecurityTip>
+                Consider sharing this backup with another trusted mobile device
+            </SecurityTip>
+            <SecurityTip>
+                Use the 'Copy' button to save your encrypted content
+            </SecurityTip>
+        </div>
+    </div>
 )
 
 const RenderContentForm = ({ content, restart, finish }: RenderContentFormProps) => {
@@ -49,20 +68,7 @@ const RenderContentForm = ({ content, restart, finish }: RenderContentFormProps)
                     setExpand={setExpand} 
                     position={2}
                 >
-                    <div className="space-y-2">
-                        <p>You can now store this encrypted content anywhere, knowing it can only be decrypted using your mobile device. For security best practices:</p>
-                        <ul className="list-none pl-1 mt-3">
-                            <BulletPoint>
-                                Back up your encryption key by exporting it as an encrypted QR code
-                            </BulletPoint>
-                            <BulletPoint>
-                                Consider sharing this backup with another trusted mobile device
-                            </BulletPoint>
-                            <BulletPoint>
-                                Use the 'Copy' button to save your encrypted content
-                            </BulletPoint>
-                        </ul>
-                    </div>
+                    <SecurityGuidance />
                 </Help>
             </Field>
             <Footer>

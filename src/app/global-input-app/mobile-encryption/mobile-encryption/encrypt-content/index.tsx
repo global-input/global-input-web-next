@@ -33,7 +33,11 @@ interface Props {
     domain: string
 }
 
-const InstructionStep = ({ number, children }) => (
+interface InstructionStepProps {
+    number?: number
+    children: React.ReactNode
+}
+const InstructionStep: React.FC<InstructionStepProps> = ({ number, children }) => (
     <div className="flex items-start space-x-2 mb-3">
         {number!==undefined && <span className="text-blue-600 font-semibold">{number}.</span>}
         <div className="flex items-center space-x-2 flex-wrap">
