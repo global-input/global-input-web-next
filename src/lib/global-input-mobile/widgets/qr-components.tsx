@@ -1,8 +1,13 @@
 'use client'
 
-import { QRCodeSVG } from 'qrcode.react'
+
 import { ScanInstructionProps, QROverlayProps } from './types'
 
+import dynamic from 'next/dynamic';
+
+const QRCodeSVG = dynamic(() => import('qrcode.react').then(mod => mod.QRCodeSVG), {
+  ssr: false,
+});
 const ButtonLike = ({ onClick, children }: {
   onClick: () => void
   children: React.ReactNode

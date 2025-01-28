@@ -3,9 +3,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMobile } from '@/lib/global-input-mobile';
-import { QRCodeSVG } from "qrcode.react";
+
 import { AppScanInstruction, AppQROverlay } from '@/lib/global-input-mobile';
 import { Footer, DarkButton, AppContainer, MoreInfo } from '../../components';
+
+import dynamic from 'next/dynamic';
+
+const QRCodeSVG = dynamic(() => import('qrcode.react').then(mod => mod.QRCodeSVG), {
+  ssr: false,
+});
 
 interface Props {
     content: string;
