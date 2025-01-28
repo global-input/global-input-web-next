@@ -15,16 +15,15 @@ export const AppContainer = ({ children }: { children: React.ReactNode }) => (
                 {children}
             </div>
         </div>
-        <div className="mx-4 px-4 text-[#153E85] font-light font-georgia text-[8px] min-[150px]:text-xs min-[400px]:text-base print:hidden">
+        <div className="mx-4 px-4 text-[#153E85] font-light mb-5 font-georgia text-[8px] min-[150px]:text-xs min-[400px]:text-base print:hidden">
             <a 
-                href="https://github.com/global-input/mobile-encryption"
+                href="https://github.com/global-input/"
                 rel="noreferrer noopener"
                 target="_blank"
                 className="text-[#153E85] hover:text-[#2855b9]"
             >
                 View on GitHub
-            </a>: explore the source code of the web application currently displayed on your computer browser, 
-            which accepts connections from the Global Input App for encryption and decryption purposes.
+            </a>
         </div>
     </div>
 )

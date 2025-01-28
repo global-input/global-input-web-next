@@ -71,6 +71,10 @@ export const ContentLabel: React.FC<Props> = ({ back, next }) => {
     };
 
     const onNext = () => {
+        if((!content) || (!content.trim().length)) {
+            mobile.sendValue(FIELDS.content.id, "Content is required" );
+            return;
+        }
         if (content.trim().length) {
             next(content, label);
         }
@@ -117,8 +121,7 @@ export const ContentLabel: React.FC<Props> = ({ back, next }) => {
                         setExpand={setExpand}
                     />
                     <MoreInfo>
-                        The mobile app sends the encrypted content generated on your mobile to this application, 
-                        which displays the received content in the text box above.
+                    Descriptive label will be placed above the QR Code to help you identify it. 
                     </MoreInfo>
                 </WhenConnected>
                 <Footer>

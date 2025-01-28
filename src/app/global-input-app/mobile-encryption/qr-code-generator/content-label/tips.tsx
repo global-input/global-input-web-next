@@ -29,30 +29,29 @@ const BackupSettingsIcon = styled.img.attrs({
 export const GeneralTips = () => (
     <Tips>
         <TipTitle>
-            Press the buttons on your mobile:
+        Available Mobile Actions:
         </TipTitle>
         <Tip>
             <EncryptOnMobileIcon />
             <TipContent>
-                This button provides you with an option of recording a disaster recovery root password. 
-                You can scan the encrypted QR code to decrypt it with your mobile when you need it.
+            This can be be used for disaster recovery backup by creating an encrypted QR code containing your disaster recovery password. You can securely store this QR code and decrypt it with your mobile device when needed. 
+            
             </TipContent>
         </Tip>
 
         <Tip>
             <BackupKeysIcon />
             <TipContent>
-                This button allows you to export any one of your encryption keys in your mobile app as an encrypted QR Code.
-                You can import back in your app by scanning it.
-                The QR code will be protected with a phrase that you need to provide when you are exporting the encryption key.
+            This can be used for exporting encryption keys from your mobile app. You can create an encrypted QR code containing one of your encryption keys. The QR code will be protected with a passphrase of your choice. You can later import this key by scanning the QR code and providing the passphrase.
+
             </TipContent>
         </Tip>
 
         <Tip>
             <BackupSettingsIcon />
             <TipContent>
-                This button allows you to export your connection settings of your mobile app. This is useful if you have
-                different applications with different connection settings.
+            this can be used for exporting connection settings of your mobile app. This is useful if you have different applications with different connection settings.
+            
             </TipContent>
         </Tip>
     </Tips>
@@ -64,6 +63,6 @@ interface FirstTipProps {
 
 export const FirstTip: React.FC<FirstTipProps> = ({ mobile }) => (
     <ConnectedInstruction mobile={mobile}>
-        You can now press <EncryptOnMobileIcon/> button on your mobile to encrypt a short content.
+        Press the <EncryptOnMobileIcon/> button on your mobile device to begin encrypting a short content, and the encrypted content will be sent to the text box below.
     </ConnectedInstruction>
 );

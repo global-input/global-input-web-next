@@ -117,7 +117,7 @@ export const GenerateQRCode: React.FC<Props> = ({ content, label, back }) => {
 
     return (
         <AppContainer>
-            <MoreInfo>QR Code generated from the content received from your mobile app:</MoreInfo>
+            <MoreInfo>QR Code contains the content received from your mobile:</MoreInfo>
             <ContentLabel>{label}</ContentLabel>
             {content ? (
                 <QRCodeSVG 

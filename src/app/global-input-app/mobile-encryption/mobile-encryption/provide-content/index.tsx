@@ -44,7 +44,7 @@ const RenderContentForm = ({ content, onContentChanged, cancel, onEncrypt }: Ren
                     id="contentToEncrypt" 
                     onChange={(evt) => onContentChanged(evt.target.value)} 
                     value={content} 
-                    placeholder="Place here the content to encrypt."
+                    placeholder="Enter the sensitive information you wish to encrypt securely."
                     onFocus={() => setExpand('contentToEncrypt')}
                 />
                 <Label htmlFor="contentToEncrypt">Content to Encrypt</Label>
@@ -53,8 +53,7 @@ const RenderContentForm = ({ content, onContentChanged, cancel, onEncrypt }: Ren
                     expand={expand} 
                     setExpand={setExpand}
                 >
-                    The content you have provided will be sent to your mobile app.
-                    You mobile app will encrypt it and send back the result to this application.
+                    How it works: when you enter content here, it will be sent to your mobile device for encryption. Your mobile app will encrypt the data using your device's secure keys and send the encrypted result back to this application for storage. This ensures your sensitive information remains protected, as only your mobile device can decrypt it. 
                 </Help>
             </Field>
             <Footer>

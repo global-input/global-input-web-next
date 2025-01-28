@@ -33,16 +33,30 @@ function ExpandIcon({ expanded, onClick }: ExpandIconProps) {
         <div
             onClick={onClick}
             className={`
-                box-border relative inline-block border border-red-500 bg-white cursor-pointer
-                w-[22px] h-[22px] border-2 rounded-full -top-[18px] mr-[5px]
-                text-[rgb(77,104,206)]
+                inline-flex items-center justify-center
+                w-6 h-6 
+                text-blue-600 hover:text-blue-700
+                cursor-pointer
+                transition-transform duration-200
                 ${expanded ? 'rotate-90' : 'rotate-0'}
-                after:content-[""] after:block after:box-border after:absolute
-                after:w-[6px] after:h-[6px] after:border-b-2 after:border-r-2
-                after:rotate-[-45deg] after:left-[5px] after:top-[6px]
             `}
-        />
-    )
+        >
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                className="w-5 h-5"
+            >
+                <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M9 5l7 7-7 7"
+                />
+            </svg>
+        </div>
+    );
 }
 
 interface HelpContentProps {

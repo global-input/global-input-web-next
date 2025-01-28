@@ -26,14 +26,16 @@ export const ContentInput: React.FC<ContentInputProps> = ({
                 onContentChanged(evt.target.value);
             }}
             value={content}
-            placeholder="Content Received from your mobile will be displayed here."
+            placeholder="Content Received from your mobile will appear here."
             onFocus={() => setExpand(CONTENT_ID)}
         />
         <Label htmlFor={CONTENT_ID}>Content</Label>
         <Help expandId={CONTENT_ID} expand={expand} setExpand={setExpand}>
-            The encrypted content received from your mobile app will be displayed in the text box above. 
-            Note that only your mobile app can decrypt the data. This application uses the encrypted data 
-            received to create an encrypted QR code in the next step.
+
+        The encrypted content from your mobile device will be displayed here once received. This content remains securely encrypted - only your mobile device holds the keys can decrypt it. In the next step, this encrypted data will be converted into a QR code that you can safely store or share.
+
+
+            
         </Help>
     </Field>
 );
@@ -58,7 +60,7 @@ export const LabelInput: React.FC<LabelInputProps> = ({
                 onLabelChanged(evt.target.value);
             }}
             value={label}
-            placeholder="Label for the content above."
+            placeholder="Enter a descriptive label for your encrypted content."
             onFocus={() => setExpand(LABEL_ID)}
         />
         <Label htmlFor={LABEL_ID}>Label</Label>
