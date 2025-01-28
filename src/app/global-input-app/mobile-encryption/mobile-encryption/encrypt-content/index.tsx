@@ -46,7 +46,12 @@ const InstructionStep: React.FC<InstructionStepProps> = ({ number, children }) =
     </div>
 )
 
-const IconImage = ({ src, alt }) => (
+interface IconImageProps {
+    src: string;
+    alt: string;
+}
+
+const IconImage: React.FC<IconImageProps> = ({ src, alt }) => (
     <Image 
         src={src} 
         alt={alt} 

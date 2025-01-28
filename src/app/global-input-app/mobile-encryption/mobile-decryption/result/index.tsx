@@ -21,6 +21,29 @@ interface RenderContentFormProps {
     restart: () => void
     finish: () => void
 }
+const SecurityTip = ({ children }) => (
+    <div className="flex items-start mb-2 last:mb-0">
+        <span className="text-[rgb(53,116,230)] mr-2 font-['Avenir']">•</span>
+        <span className="text-[rgb(53,116,230)] font-['Avenir'] flex-1">{children}</span>
+    </div>
+)
+
+const SecurityGuidance = () => (
+    <div className="space-y-3">
+        <p className="text-[rgb(53,116,230)] font-['Avenir']">            
+            This decrypted content is received from your mobile app as it is.
+        </p>
+        <div className="ml-1">
+            <SecurityTip>
+            No content is stored on the server.
+            </SecurityTip>            
+            <SecurityTip>
+                Use the 'Copy' button to copy your decrupted content for further use.
+            </SecurityTip>
+        </div>
+    </div>
+)
+
 
 const RenderContentForm = ({ content, restart, finish }: RenderContentFormProps) => {
     const [expand, setExpand] = useState('decryptedContent')
@@ -43,7 +66,8 @@ const RenderContentForm = ({ content, restart, finish }: RenderContentFormProps)
                     setExpand={setExpand} 
                     position={2}
                 >
-                    This decrypted content is received from your mobile app as it is.
+                    
+                    <SecurityGuidance />
                 </Help>
             </Field>
             <Footer>
