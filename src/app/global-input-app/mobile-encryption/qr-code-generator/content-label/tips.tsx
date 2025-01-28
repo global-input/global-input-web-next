@@ -9,11 +9,13 @@ const encryptOnMobileImage = '/images/mobile-encryption/encrypt-on-mobile.png';
 const keysOnMobileImage = '/images/mobile-encryption/keys-on-mobile.png';
 const settingsOnMobileImage = '/images/mobile-encryption/settings-on-mobile.png';
 
-const EncryptOnMobileIcon = styled.img.attrs({
-    src: encryptOnMobileImage,
-    alt: 'Encrypt'
-})``;
-
+const EncryptOnMobileIcon = () => (
+    <img 
+        src={encryptOnMobileImage} 
+        alt="Encrypt" 
+        className="inline-block align-middle mx-1" // This makes it flow with text
+    />
+);
 const BackupKeysIcon = styled.img.attrs({
     src: keysOnMobileImage,
     alt: 'Backup Keys'
