@@ -1,10 +1,10 @@
 'use client';
 
-import GameComponent from './GameComponent';
+import GameComponent from '../GameComponent';
 
 let myGamePiece: GameComponent | null = null;
 let myObstacles: GameComponent[] = [];
-let interval: NodeJS.Timer | null = null;
+let interval: ReturnType<typeof setInterval> | null = null;
 let canvas: HTMLCanvasElement | null = null;
 let canvasContext: CanvasRenderingContext2D | null = null;
 let frameNo: number = 0;

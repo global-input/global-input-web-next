@@ -93,7 +93,7 @@ const FIELDS = {
         ],
         viewId: "footer",
         operations: {
-            onInput: value => {
+            onInput: (value: any) => {
                 switch (value) {
                     case 0: game.startGame(); break;
                     case 1: game.pauseGame(); break;

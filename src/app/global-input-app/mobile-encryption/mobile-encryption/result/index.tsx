@@ -20,7 +20,7 @@ interface RenderContentFormProps {
     finish: () => void
 }
 
-const SecurityTip = ({ children }) => (
+const SecurityTip: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="flex items-start mb-2 last:mb-0">
         <span className="text-[rgb(53,116,230)] mr-2 font-['Avenir']">•</span>
         <span className="text-[rgb(53,116,230)] font-['Avenir'] flex-1">{children}</span>

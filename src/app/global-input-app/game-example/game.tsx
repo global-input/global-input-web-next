@@ -53,7 +53,7 @@ const startThread = () => {
 
 const stopThread = () => {
     if (interval) {
-        clearInterval(interval);
+        clearInterval(interval as NodeJS.Timeout);
         interval = null;
     }
     if (previewTimeout) {
