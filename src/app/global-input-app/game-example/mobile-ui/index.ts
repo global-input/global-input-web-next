@@ -101,6 +101,21 @@ const FIELDS = {
                 }
             }
         }
+    },
+    home:{
+        id: 'back-to-website-home',
+        type: 'button',
+        label: 'Back to Home',
+        viewId: "row5",
+        icon: 'home',
+        style: {
+            backgroundColor: 'rgb(220,220,220)'
+        },
+        operations: {
+            onInput: () => {    
+                console.log('back to home');
+            }
+        }
     }
 };
 
@@ -134,12 +149,14 @@ const initData = {
         },
         fields: Object.values(FIELDS)
     }
+    
+    
 };
 
 export const useConnectMobile = () => {
-    const router = useRouter();
-    const mobile = useMobile(initData, true);
+    const router = useRouter();    
     const [score, setScore] = useState(0);
+    const mobile = useMobile(initData, true);
 
     const setMoveSpeed = (speed: number) => {
         const speedValue = {
@@ -148,6 +165,12 @@ export const useConnectMobile = () => {
         };
         mobile.sendValue(FIELDS.speedText.id, speedValue);
     };
+    const homeField=initData.form.fields.find(field=>field.id===FIELDS.home.id);
+if(homeField && 'operations' in homeField){
+    homeField.operations.onInput=()=>{
+        router.push('/');
+    };
+}
 
     const seGameStatus = (message: string) => {
         const statusValue = {
