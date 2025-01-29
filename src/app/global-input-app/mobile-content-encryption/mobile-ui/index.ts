@@ -27,7 +27,7 @@ const FIELDS = {
   encryption: {
     id: "mobile-encryption-example",
     type: "button",
-    label: "See It In Action",
+    label: "Connect Mobile",
     icon: "encrypt",
     viewId: "row2",
   },

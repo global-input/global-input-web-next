@@ -27,7 +27,7 @@ const FIELDS = {
   game: {
     id: "game-control-example",
     type: "button",
-    label: "See It In Action",
+    label: "Connect Mobile",
     icon: "play",
     viewId: "row2",
   },

@@ -92,7 +92,7 @@ export const AppTitleSection=styled.div`
 
 
 const SourceLink = styled(SourceLinkElement).attrs({
-    href: 'https://github.com/global-input/game-control-example',
+    href: 'https://github.com/global-input/',
     rel: 'noreferrer noopener',
     target: '_blank'
 })``;

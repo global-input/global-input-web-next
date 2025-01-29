@@ -7,7 +7,7 @@ export default function MobileConnect() {
   
   return (
     <>
-      <ConnectButton mobile={mobile} label="See it in action" />
+      <ConnectButton mobile={mobile} label="Connect Mobile" />
       <ConnectWindow mobile={mobile} />
     </>
   );

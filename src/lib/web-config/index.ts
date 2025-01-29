@@ -61,9 +61,7 @@ const config = {
       url: "https://github.com/global-input/global-input-node",
     },
     chromeExtension: {
-      url: "https://chrome.google.com/webstore/detail/global-input-app/hcklienddlealndjnakkagefaelhnjkp",
-      websites:
-        "https://github.com/global-input/chrome-extension/tree/master/application-controls",
+      url: "https://chrome.google.com/webstore/detail/global-input-app/hcklienddlealndjnakkagefaelhnjkp"      
     },
     firefox: {
       url: "https://addons.mozilla.org/en-GB/firefox/addon/global-input-app/",
@@ -83,7 +81,7 @@ const config = {
     authenticationDemo: { url: "https://www.youtube.com/watch?v=jLIIrlEoQXM" },
     introductionVideo: { url: "https://www.youtube.com/watch?v=HzeTY1TA4V8" },
     TransferFormGigHub: {
-      url: "https://github.com/global-input/transfer-form-data-example",
+      url: "https://github.com/global-input/",
     },
     appdownload: {
       appStore:

@@ -27,7 +27,7 @@ const FIELDS = {
   contentTransfer: {
     id: "content-transfer-example",
     type: "button",
-    label: "See It In Action",
+    label: "Connect Mobile",
     icon: "right",
     viewId: "row2",
   },

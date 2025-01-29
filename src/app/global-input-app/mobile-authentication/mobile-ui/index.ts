@@ -27,7 +27,7 @@ const FIELDS = {
   transferForm: {
     id: "transfer-form-example",
     type: "button",
-    label: "See It In Action",
+    label: "Connect Mobile",
     icon: "send",
     viewId: "row2",
   },

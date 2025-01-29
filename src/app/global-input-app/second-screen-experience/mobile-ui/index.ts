@@ -27,7 +27,7 @@ const FIELDS = {
   secondScreen: {
     id: "second-screen-example",
     type: "button",
-    label: "See It In Action",
+    label: "Connect Mobile",
     icon: "play",
     viewId: "row2",
   },

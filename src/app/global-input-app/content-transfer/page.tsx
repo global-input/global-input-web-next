@@ -145,7 +145,7 @@ const A = styled.a`
 `;
 
 const SourceCodeLink = styled(A).attrs({
-    href: 'https://github.com/global-input/content-transfer-example',
+    href: 'https://github.com/global-input/',
     rel: 'noreferrer noopener',
     target: '_blank'
 })``;

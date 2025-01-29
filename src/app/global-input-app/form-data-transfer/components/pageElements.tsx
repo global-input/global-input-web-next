@@ -13,7 +13,7 @@ import {
 } from '../common-elements';
 
 const SourceLink = styled(SourceLinkElement).attrs({
-    href: 'https://github.com/global-input/transfer-form-data-example',
+    href: 'https://github.com/global-input/',
     rel: 'noreferrer noopener',
     target: '_blank'
 })``;
