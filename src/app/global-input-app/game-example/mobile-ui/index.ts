@@ -165,14 +165,15 @@ export const useConnectMobile = () => {
         };
         mobile.sendValue(FIELDS.speedText.id, speedValue);
     };
-    const homeField=initData.form.fields.find(field=>field.id===FIELDS.home.id);
-if(homeField && 'operations' in homeField){
-    homeField.operations.onInput=()=>{
-        router.push('/');
-    };
-}
 
-    const seGameStatus = (message: string) => {
+    const homeField = initData.form.fields.find(field => field.id === FIELDS.home.id);
+    if(homeField && 'operations' in homeField) {
+        homeField.operations.onInput = () => {
+            router.push('/');
+        };
+    }
+
+    const setGameStatus = (message: string) => {
         const statusValue = {
             type: "view",
             style: {
@@ -185,17 +186,21 @@ if(homeField && 'operations' in homeField){
 
     const onGameRunning = () => {
         mobile.sendValue(FIELDS.startPause.id, FIELDS.startPause.options[1].value);
-        seGameStatus('Game Started');
+        setGameStatus('Game Started');
     };
 
     const onGameStopped = () => {
         mobile.sendValue(FIELDS.startPause.id, FIELDS.startPause.options[0].value);
-        seGameStatus('Game Over');
+        setGameStatus('Game Over');
     };
 
     const onGamePaused = () => {
         mobile.sendValue(FIELDS.startPause.id, FIELDS.startPause.options[2].value);
-        seGameStatus('Game Paused');
+        setGameStatus('Game Paused');
+    };
+
+    const onGameInitialized = () => {
+        setGameStatus('Ready to Play');
     };
 
     const onSpeedChanges = (moveSpeed: number) => {
@@ -211,6 +216,7 @@ if(homeField && 'operations' in homeField){
         onGameRunning,
         onGameStopped,
         onGamePaused,
+        onGameInitialized,
         onSpeedChanges,
         onFrameNo
     };

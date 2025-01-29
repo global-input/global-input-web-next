@@ -10,6 +10,7 @@ let canvasContext: CanvasRenderingContext2D | null = null;
 let frameNo: number = 0;
 let eventListeners: any = {};
 let lastFrameUpdate: number | null = null;
+let previewTimeout: NodeJS.Timeout | null = null;
 
 const initGameState = () => {
     if (!canvas || !canvasContext) return;
@@ -25,6 +26,15 @@ export const initGame = (targetCanvas: HTMLCanvasElement, listeners: any) => {
     eventListeners = listeners;
     canvasContext = canvas?.getContext("2d");
     initGameState();
+    
+    // Start a preview animation for 2 seconds
+    startGame();
+    previewTimeout = setTimeout(() => {
+        pauseGame();
+        if (eventListeners.onGameInitialized) {
+            eventListeners.onGameInitialized();
+        }
+    }, 2000);
 };
 
 const isGameStarted = () => {
@@ -45,6 +55,10 @@ const stopThread = () => {
     if (interval) {
         clearInterval(interval);
         interval = null;
+    }
+    if (previewTimeout) {
+        clearTimeout(previewTimeout);
+        previewTimeout = null;
     }
 };
 
