@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useMobile } from '@/lib/global-input-mobile';
 import type { InitData } from '@/lib/global-input-mobile';
 import * as storage from '../storage';
-import * as microAppsUI from '@/lib/micro-apps/mobile-ui';
+import * as commonMobileUI from '@/lib/common-mobile-uis/mobile-ui';
 
 export * from '@/lib/global-input-mobile';
 
@@ -36,7 +36,7 @@ export const FIELDS = {
     }
 };
 
-microAppsUI.add(FIELDS);
+commonMobileUI.add(FIELDS);
 
 interface ConnectMobileProps {
     domain: string;
@@ -89,7 +89,7 @@ export const useConnectMobile = ({
                     onFormModified(newFormFields, false);
                 }
                 if (!fieldModified) {
-                    microAppsUI.onFieldChange(field, router.push);
+                    commonMobileUI.onFieldChange(field, router.push);
                 }
         }
     });

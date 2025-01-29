@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import * as mobileUI from '@/lib/micro-apps/mobile-ui';
+import * as mobileUI from '@/lib/common-mobile-uis/mobile-ui';
 import { useMobile } from '@/lib/global-input-mobile';
 
 import * as selectorUI from './selectorUI';

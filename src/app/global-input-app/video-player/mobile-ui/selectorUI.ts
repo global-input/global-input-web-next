@@ -1,5 +1,5 @@
 import type {MobileData} from '@/lib/global-input-mobile';
-import * as microAppsUI from '@/lib/micro-apps/mobile-ui';
+import * as commonMobileUI from '@/lib/common-mobile-uis/mobile-ui';
 
 export const initDataId = "second-screen-video-selector";
 
@@ -45,7 +45,7 @@ export const fields = {
         type: "button",
         icon: "select",
         viewId: "row3"
-    },backToWebsiteHome:microAppsUI.home////website
+    },backToWebsiteHome:commonMobileUI.home////website
 };
 
 const titleValue = (title: string) => {

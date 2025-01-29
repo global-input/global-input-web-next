@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useMobile, ConnectWidget } from '@/lib/global-input-mobile';
-import * as mobileUI from '@/lib/micro-apps/mobile-ui';
+import * as mobileUI from '@/lib/common-mobile-uis/mobile-ui';
 import type {FormField} from '@/lib/global-input-mobile';
 
 export { ConnectWidget };
