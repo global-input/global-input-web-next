@@ -6,7 +6,7 @@ export const FIELDS = {
     info: {
         id: "info",
         type: "info",
-        value: "",
+        value: "Please provide the content to be encrypted on the computer.",
     },
     back: {
         id: "backToHome",

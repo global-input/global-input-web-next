@@ -20,7 +20,7 @@ const processEncrypt = (mobile: any, content: string, startEncrypt: (content: st
         startEncrypt(content.trim())
     } else {
         mobile.sendValue(infoId, {
-            content: 'Please provide the content to encrypt using the application connected to your mobile app.',
+            content: 'Waiting for the content from the connected application',
             style: { color: 'red' }
         })
     }

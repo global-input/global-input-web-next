@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-
+import { ApplicationTopContainer } from '@/components/containers';  
 import * as storage from './storage';
 import {
     useConnectMobile,
@@ -158,7 +158,9 @@ const loadDomain = () => {
 export default function FormDataTransfer() {
     return (
         <Suspense fallback={<FormLoadingState />}>
-            <FormContent />
+            <ApplicationTopContainer>
+                <FormContent />                            
+            </ApplicationTopContainer>
         </Suspense>
     );
 }

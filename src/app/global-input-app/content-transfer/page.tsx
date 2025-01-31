@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 
 import { useConnectMobile,ConnectWidget } from './mobile-ui';
-
+import { ApplicationTopContainer } from '@/components/containers'  
 const ContentTransfer = () => {
     const [content, setContent] = useState('');
     const { mobile, onContentChanged } = useConnectMobile({ setContent });
@@ -18,6 +18,7 @@ const ContentTransfer = () => {
     };
 
     return (
+        <ApplicationTopContainer>
         <Container>
             <Title>A Mobile Interoperability Example</Title>
             <SourceCodeLink>source code</SourceCodeLink>
@@ -41,6 +42,7 @@ const ContentTransfer = () => {
                 </Text>
             </Form>
         </Container>
+        </ApplicationTopContainer>
     );
 };
 
@@ -53,6 +55,7 @@ const Container = styled.div`
     align-items: center;
     min-height: 100vh;
     width: 100%;
+    background-color: #f9f9f9;
 `;
 
 const Title = styled.div`

@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import * as videoControl from './videoControl';
 import { AppContainer, Footer, useWindowSize } from './components';
+import { ApplicationTopContainer } from '@/components/containers'  
 import { useConnectMobile, ConnectWindow, ConnectButton } from './mobile-ui';
 
 const VideoPlayer = () => {
@@ -52,6 +53,7 @@ const VideoPlayer = () => {
   };
 
   return (
+    <ApplicationTopContainer>
     <AppContainer>
       <video 
         width={videoWidth} 
@@ -93,6 +95,7 @@ const VideoPlayer = () => {
         <ConnectButton mobile={mobile} />
       </Footer>
     </AppContainer>
+    </ApplicationTopContainer>
   );
 };
 
